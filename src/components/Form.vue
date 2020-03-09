@@ -1,5 +1,9 @@
 <template>
-  <form class="form">
+  <form
+    class="form"
+    @submit.prevent="handleSubmit"
+    @reset="handleReset"
+  >
     <slot />
   </form>
 </template>
@@ -10,13 +14,20 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'Form',
   props: {},
+  methods: {
+    handleReset(): void {
+      console.log('reset');
+    },
+    handleSubmit(): void {
+      console.log('submit');
+    },
+  },
 });
 </script>
 
 <style scoped lang="scss">
 .form {
   display: grid;
-  min-height: inherit;
   grid-template-areas:
     "email-field"
     "password-field"
@@ -28,15 +39,11 @@ export default Vue.extend({
     min-content
     min-content
   ;
-  border: 1px solid black;
-  align-content: center;
-  align-items: center;
-  justify-items: center;
-
-  // dummy
-  max-width: 500px;
   margin: auto;
-  height: fit-content;
+  padding: 1.5rem;
+  width: 100%;
+  border: 1px solid black;
+
 }
 
 </style>

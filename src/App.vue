@@ -1,11 +1,11 @@
 <template>
   <div id="app" class="app">
     <Form>
-      <Field />
-      <Field />
+      <Email/>
+      <Password />
       <Meter />
-      <Button />
-      <Button />
+      <Button type="reset" />
+      <Button type="submit" />
     </Form>
   </div>
 </template>
@@ -14,8 +14,9 @@
 import Vue from 'vue';
 
 import Form from './components/Form.vue';
+import Email from './components/Email.vue';
+import Password from './components/Password.vue';
 import Button from './components/Button.vue';
-import Field from './components/Field.vue';
 import Meter from './components/Meter.vue';
 
 export default Vue.extend({
@@ -23,7 +24,8 @@ export default Vue.extend({
   components: {
     Form,
     Button,
-    Field,
+    Email,
+    Password,
     Meter,
   },
 });
@@ -52,5 +54,11 @@ body {
 <style lang="scss" scoped>
 .app {
   min-height: inherit; // https://stackoverflow.com/a/43669966
+
+  // dummy
+  display: flex;
+  margin: auto;
+  padding: 1.5rem;
+  max-width: 500px;
 }
 </style>
