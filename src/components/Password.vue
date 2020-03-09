@@ -9,7 +9,7 @@
       </span>
     </label>
     <input
-      :type="isClearText"
+      :type="fieldType"
       class="input"
       placeholder="Password"
       id="email"
@@ -51,7 +51,7 @@ export default Vue.extend({
   },
   computed: {
     fieldType(): string {
-      return this.isClearText ? 'text' : 'password';
+      return (this.isClearText) ? 'text' : 'password';
     },
   },
 
