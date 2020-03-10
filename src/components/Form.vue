@@ -2,20 +2,18 @@
   <form
     class="form"
     @submit.prevent="handleSubmit"
-    @reset="handleReset"
+    @reset.prevent="handleReset"
   >
-    <Email v-model="formValues.email"/>
+    <Email v-model.trim="formValues.email"/>
 
-    <Password v-model="formValues.password"/>
+    <Password v-model.trim="formValues.password"/>
     <Meter />
     <Button type="reset" />
     <Button type="submit" />
 
     <fieldset class="debug">
       <legend>Debug:</legend>
-      <output class="output">
-        {{ formValues }}
-      </output>
+      <output class="output">{{ formValues }}</output>
     </fieldset>
   </form>
 </template>
@@ -49,6 +47,18 @@ export default Vue.extend({
   methods: {
     handleReset(): void {
       console.log('reset');
+
+      const entries = Object.entries(this.formValues);
+      const newFormValuesNested = entries.map(([key]) => {
+        const newValue = {
+          [key]: '',
+        };
+
+        return newValue;
+      });
+      const newFormValues = Object.assign({}, ...newFormValuesNested);
+
+      this.formValues = newFormValues;
     },
     handleSubmit(): void {
       console.log('submit');
