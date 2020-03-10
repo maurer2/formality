@@ -1,6 +1,6 @@
 <template>
   <div class="field">
-    <label class="label" for="email">
+    <label class="label" for="password">
       <span class="text">
         Password
       </span>
@@ -12,20 +12,20 @@
       :type="fieldType"
       class="input"
       placeholder="Password"
-      id="email"
-      name="email"
-      v-model.trim="value"
+      id="password"
+      name="password"
       autocomplete="off"
+      :value="value"
+      @input="updateValue"
     />
     <button type="button" @click="toggleInputType">
-      <template v-if="isClearText">
-        Hide password
-      </template>
-      <template v-else>
+      <template v-if="isObfuscated">
         Show password
       </template>
+      <template v-else>
+        Hide password
+      </template>
     </button>
-
   </div>
 
 </template>
@@ -35,23 +35,38 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'Password',
-  props: {},
+  props: {
+    value: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
-      value: 'PASS' as string,
       isValid: true as boolean,
       hasBeenInteractedWith: false as boolean,
-      isClearText: false as boolean,
+      isObfuscated: true as boolean,
     };
-  },
-  methods: {
-    toggleInputType() {
-      this.isClearText = !this.isClearText;
-    },
   },
   computed: {
     fieldType(): string {
-      return (this.isClearText) ? 'text' : 'password';
+      return (this.isObfuscated) ? 'password' : 'text';
+    },
+  },
+  methods: {
+    toggleInputType() {
+      this.isObfuscated = !this.isObfuscated;
+    },
+    updateValue(event: Event): void {
+      const { target }: { target: EventTarget | null } = event;
+
+      if (target === null) {
+        return;
+      }
+
+      const newValue: string = (target as HTMLInputElement).value;
+
+      this.$emit('input', newValue);
     },
   },
 

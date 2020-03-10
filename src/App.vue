@@ -1,12 +1,6 @@
 <template>
   <div id="app" class="app">
-    <Form>
-      <Email/>
-      <Password />
-      <Meter />
-      <Button type="reset" />
-      <Button type="submit" />
-    </Form>
+    <Form />
   </div>
 </template>
 
@@ -14,19 +8,11 @@
 import Vue from 'vue';
 
 import Form from './components/Form.vue';
-import Email from './components/Email.vue';
-import Password from './components/Password.vue';
-import Button from './components/Button.vue';
-import Meter from './components/Meter.vue';
 
 export default Vue.extend({
   name: 'App',
   components: {
     Form,
-    Button,
-    Email,
-    Password,
-    Meter,
   },
 });
 </script>

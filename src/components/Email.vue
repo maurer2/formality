@@ -14,8 +14,9 @@
       placeholder="E-Mail"
       id="email"
       name="email"
-      v-model.trim="value"
       autocomplete="off"
+      :value="value"
+      @input="updateValue"
     />
   </div>
 
@@ -26,13 +27,30 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'Email',
-  props: {},
+  props: {
+    value: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
-      value: '' as string,
       isValid: true as boolean,
       hasBeenInteractedWith: false as boolean,
     };
+  },
+  methods: {
+    updateValue(event: Event): void {
+      const { target }: { target: EventTarget | null } = event;
+
+      if (target === null) {
+        return;
+      }
+
+      const newValue: string = (target as HTMLInputElement).value;
+
+      this.$emit('input', newValue);
+    },
   },
 });
 </script>
