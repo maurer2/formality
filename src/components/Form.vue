@@ -79,16 +79,14 @@ export default Vue.extend({
     "email-field"
     "password-field"
     "feedback"
-    "submit reset"
-  ;
+    "submit reset";
   grid-template-rows:
     min-content
     min-content
-    min-content
-  ;
+    min-content;
+  width: 100%;
   margin: auto;
   padding: 1.5rem;
-  width: 100%;
   border: 1px solid black;
 }
 

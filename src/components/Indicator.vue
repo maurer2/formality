@@ -53,9 +53,8 @@ export default Vue.extend({
 .meter {
   display: block;
   flex: 1;
-
-  appearance: none;
   background: #c3c3c3;
+  appearance: none;
 }
 
 .output {

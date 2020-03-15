@@ -38,10 +38,10 @@ body {
 
 .visually-hidden {
   position: absolute;
-  margin: -1px;
-  padding: 0;
   width: 1px;
   height: 1px;
+  margin: -1px;
+  padding: 0;
   border: 0;
   overflow: hidden;
   clip: rect(0 0 0 0);
@@ -50,12 +50,12 @@ body {
 
 <style lang="scss" scoped>
 .app {
-  min-height: inherit; // https://stackoverflow.com/a/43669966
 
   // dummy
   display: flex;
+  max-width: 500px;
+  min-height: inherit; // https://stackoverflow.com/a/43669966
   margin: auto;
   padding: 1.5rem;
-  max-width: 500px;
 }
 </style>

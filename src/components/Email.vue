@@ -58,8 +58,8 @@ export default Vue.extend({
 <style scoped lang="scss">
 .field {
   display: flex;
-  margin-bottom: 1rem;
   flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 </style>

@@ -104,8 +104,8 @@ export default Vue.extend({
 <style scoped lang="scss">
 .field {
   display: flex;
-  margin-bottom: 1rem;
   flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 .input-group {
@@ -118,14 +118,14 @@ export default Vue.extend({
 }
 
 .button {
-  padding: 2px;
   flex-grow: 0;
+  padding: 2px;
   // all: unset;
   // border: 1px solid #a0a0a0;
 
   &--is-disabled {
-    opacity: 0.25;
     cursor: not-allowed;
+    opacity: 0.25;
   }
 }
 
