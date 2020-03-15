@@ -8,24 +8,36 @@
         {{ isValid ? '✓' : 'x' }}
       </span>
     </label>
-    <input
-      :type="fieldType"
-      class="input"
-      placeholder="Password"
-      id="password"
-      name="password"
-      autocomplete="off"
-      :value="value"
-      @input="updateValue"
-    />
-    <button type="button" @click="toggleInputType">
-      <template v-if="isObfuscated">
-        Show password
-      </template>
-      <template v-else>
-        Hide password
-      </template>
-    </button>
+    <div class="input-group">
+      <input
+        :type="fieldType"
+        class="input"
+        placeholder="Password"
+        id="password"
+        name="password"
+        autocomplete="off"
+        :value="value"
+        @input="updateValue"
+      />
+      <button class="button" type="button" @click="toggleInputType">
+        <template v-if="isObfuscated">
+          <span class="visually-hidden">
+            Show password
+          </span>
+          <span class="icon">
+            <EyeIcon />
+          </span>
+        </template>
+        <template v-else>
+          <span class="visually-hidden">
+            Hide password
+          </span>
+          <span class="icon">
+            <EyeDisabledIcon />
+          </span>
+        </template>
+      </button>
+    </div>
   </div>
 
 </template>
@@ -33,8 +45,15 @@
 <script lang="ts">
 import Vue from 'vue';
 
+import EyeIcon from '../../public/eye.svg';
+import EyeDisabledIcon from '../../public/eye-disabled.svg';
+
 export default Vue.extend({
   name: 'Password',
+  components: {
+    EyeIcon,
+    EyeDisabledIcon,
+  },
   props: {
     value: {
       type: String,
@@ -78,6 +97,21 @@ export default Vue.extend({
   display: flex;
   margin-bottom: 1rem;
   flex-direction: column;
+}
+
+.input-group {
+  display: flex;
+}
+
+.input {
+  flex-grow: 1;
+  margin-right: 0.5rem;
+}
+
+.button {
+  flex-grow: 0;
+  all: unset;
+  border: 1px solid inherit;
 }
 
 </style>

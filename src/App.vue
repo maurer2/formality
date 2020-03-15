@@ -35,6 +35,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.visually-hidden {
+  position: absolute;
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
 </style>
 
 <style lang="scss" scoped>

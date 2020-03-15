@@ -5,7 +5,6 @@
     @reset.prevent="handleReset"
   >
     <Email v-model.trim="formValues.email"/>
-
     <Password v-model.trim="formValues.password"/>
     <Meter />
     <Button type="reset" />
