@@ -5,10 +5,15 @@
     @reset.prevent="handleReset"
   >
     <Email v-model.trim="formValues.email"/>
+
     <Password v-model.trim="formValues.password"/>
-    <Meter />
-    <Button type="reset" />
-    <Button type="submit" />
+
+    <Indicator :calculatedStrength="calculatedStrength" />
+
+    <div class="button-group">
+      <Button class="button" type="reset" />
+      <Button class="button" type="submit" />
+    </div>
 
     <fieldset class="debug">
       <legend>Debug:</legend>
@@ -23,7 +28,7 @@ import Vue from 'vue';
 import Email from './Email.vue';
 import Password from './Password.vue';
 import Button from './Button.vue';
-import Meter from './Meter.vue';
+import Indicator from './Indicator.vue';
 
 export default Vue.extend({
   name: 'Form',
@@ -31,7 +36,7 @@ export default Vue.extend({
     Button,
     Email,
     Password,
-    Meter,
+    Indicator,
   },
   props: {},
   data() {
@@ -41,6 +46,7 @@ export default Vue.extend({
         password: '' as string,
       },
       formIsValid: false as boolean,
+      calculatedStrength: 1 as number,
     };
   },
   methods: {
@@ -84,6 +90,14 @@ export default Vue.extend({
   padding: 1.5rem;
   width: 100%;
   border: 1px solid black;
+}
+
+.button-group {
+  display: flex;
+}
+
+.button {
+  flex: 1;
 }
 
 .debug {
