@@ -18,10 +18,11 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '~normalize-scss';
+// @import '~normalize-scss';
 @import '~sanitize.css';
+@import '~sanitize.css/forms.css';
 
-@include normalize();
+// @include normalize();
 
 html {
   min-height: 100%;

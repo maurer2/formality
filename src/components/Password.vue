@@ -19,7 +19,13 @@
         :value="value"
         @input="updateValue"
       />
-      <button class="button" type="button" @click="toggleInputType">
+      <button
+        class="button"
+        :class="{ 'button--is-disabled': toggleButtonIsDisabled }"
+        type="button"
+        @click="toggleInputType"
+        :disabled="toggleButtonIsDisabled"
+      >
         <template v-if="isObfuscated">
           <span class="visually-hidden">
             Show password
@@ -71,6 +77,9 @@ export default Vue.extend({
     fieldType(): string {
       return (this.isObfuscated) ? 'password' : 'text';
     },
+    toggleButtonIsDisabled(): boolean {
+      return this.value === '';
+    },
   },
   methods: {
     toggleInputType() {
@@ -109,9 +118,15 @@ export default Vue.extend({
 }
 
 .button {
+  padding: 2px;
   flex-grow: 0;
-  all: unset;
-  border: 1px solid inherit;
+  // all: unset;
+  // border: 1px solid #a0a0a0;
+
+  &--is-disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+  }
 }
 
 </style>
