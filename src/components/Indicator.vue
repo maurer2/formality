@@ -1,23 +1,23 @@
 <template>
   <div class="indicator">
-    <meter
-      class="meter"
-      :value="valueMapped"
-      min="0"
-      max="3"
-      id="meter"
-    >
-    </meter>
     <label for="meter">
-      <span class="text">
-        Password strength:
-      </span>
-      <output class="value" for="meter">
+      Password strength
+    </label>
+    <div class="element-group">
+      <meter
+        class="meter"
+        :value="valueMapped"
+        min="0"
+        max="3"
+        id="meter"
+      >
+      </meter>
+      <output class="output" for="meter">
         {{ valueMapped }}
       </output>
-    </label>
-
+    </div>
   </div>
+
 </template>
 
 <script lang="ts">
@@ -41,9 +41,25 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+.indicator {
+  margin-bottom: 1rem;
+}
+
+.element-group {
+  display: flex;
+  align-items: center;
+}
+
 .meter {
   display: block;
-  width: auto;
+  flex: 1;
+
+  appearance: none;
+  background: #c3c3c3;
+}
+
+.output {
+  margin-left: 0.5rem;
 }
 
 </style>
