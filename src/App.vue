@@ -18,11 +18,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-// @import '~normalize-scss';
 @import '~sanitize.css';
 @import '~sanitize.css/forms.css';
-
-// @include normalize();
 
 html {
   min-height: 100%;
@@ -50,10 +47,9 @@ body {
 
 <style lang="scss" scoped>
 .app {
-
   // dummy
   display: flex;
-  max-width: 500px;
+  max-width: 555px;
   min-height: inherit; // https://stackoverflow.com/a/43669966
   margin: auto;
   padding: 1.5rem;

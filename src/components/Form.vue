@@ -17,7 +17,7 @@
 
     <fieldset class="debug">
       <legend>Debug:</legend>
-      <output class="output">{{ formValues }}</output>
+      <output class="output">{{ $data }}</output>
     </fieldset>
   </form>
 </template>
@@ -29,6 +29,8 @@ import Email from './Email.vue';
 import Password from './Password.vue';
 import Button from './Button.vue';
 import Indicator from './Indicator.vue';
+
+import passwordStrength from '../services/password-strength';
 
 export default Vue.extend({
   name: 'Form',
@@ -46,7 +48,8 @@ export default Vue.extend({
         password: '' as string,
       },
       formIsValid: false as boolean,
-      calculatedStrength: 1 as number,
+      calculatedStrength: -1 as number,
+      passwordFeedback: {},
     };
   },
   methods: {
@@ -64,9 +67,17 @@ export default Vue.extend({
       const newFormValues = Object.assign({}, ...newFormValuesNested);
 
       this.formValues = newFormValues;
+      this.calculatedStrength = -1;
+      this.passwordFeedback = {};
     },
     handleSubmit(): void {
-      console.log('submit');
+      const { password } = this.formValues;
+      const passwordCalculations = passwordStrength.getPasswordStrength(password);
+
+      console.log('submit', passwordCalculations);
+
+      this.calculatedStrength = passwordCalculations.score;
+      this.passwordFeedback = passwordCalculations.feedback;
     },
   },
 });
@@ -99,7 +110,10 @@ export default Vue.extend({
 }
 
 .debug {
+  display: block;
   margin-top: 1.5rem;
+  max-width: 50ch;
+  overflow: scroll;
 }
 
 .output {
