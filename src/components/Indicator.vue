@@ -1,21 +1,20 @@
 <template>
   <div class="indicator">
-    <label for="meter">
-      Password strength
-    </label>
-    <div class="element-group">
-      <meter
-        class="meter"
-        :value="valueMapped"
-        min="0"
-        max="3"
-        id="meter"
-      >
-      </meter>
-      <output class="output" for="meter">
-        {{ valueMapped }}
+    <label class="label" for="meter">
+      <span class="text">
+        Password strength
+      </span>
+      <output class="output" for="meter" v-if="valueMapped">
+        <span>{{ valueMapped }}</span>
       </output>
-    </div>
+    </label>
+    <meter
+      class="meter"
+      :value="value"
+      min="0"
+      max="4"
+      id="meter"
+    />
   </div>
 
 </template>
@@ -23,18 +22,33 @@
 <script lang="ts">
 import Vue from 'vue';
 
+const valueMap: { [key: string]: string} = {
+  0: 'invalid',
+  1: 'weak',
+  2: 'average',
+  3: 'strong',
+  4: 'very strong',
+};
+
 export default Vue.extend({
   name: 'Indicator',
   props: {
-    calculatedStrength: {
+    value: {
       type: Number,
       required: true,
       default: 0,
     },
   },
   computed: {
-    valueMapped(): number {
-      return this.calculatedStrength;
+    valueMapped(): string {
+      if (!(this.value in valueMap)) {
+        return '';
+      }
+
+      return valueMap[this.value];
+    },
+    isDisabled(): boolean {
+      return this.value === 0;
     },
   },
 });
@@ -45,20 +59,19 @@ export default Vue.extend({
   margin-bottom: 1rem;
 }
 
-.element-group {
+.label {
   display: flex;
-  align-items: center;
+}
+
+.output {
+  margin-left: auto;
 }
 
 .meter {
   display: block;
-  flex: 1;
+  width: 100%;
   background: #c3c3c3;
-  appearance: none;
-}
-
-.output {
-  margin-left: 0.5rem;
+  // appearance: none;
 }
 
 </style>

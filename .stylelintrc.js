@@ -8,9 +8,12 @@ module.exports = {
     // 'selector-nested-pattern': '^&',
     'at-rule-no-unknown': null,
     'order/properties-order': [],
-    'plugin/rational-order': [true, {
-      'border-in-box-model': true,
-      'empty-line-between-groups': true,
-    }],
+    'plugin/rational-order': [
+      true,
+      {
+        'border-in-box-model': true,
+        'empty-line-between-groups': false,
+      }
+    ],
   },
 };
