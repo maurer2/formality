@@ -1,4 +1,4 @@
-import passwordStrengthCalculator from 'zxcvbn';
+import passwordStrengthCalculator, { ZXCVBNResult } from 'zxcvbn';
 
 export default {
   getPasswordStrength(password: string, userInputs: string[] = []) {
@@ -7,3 +7,5 @@ export default {
     return calculatedStrength;
   },
 };
+
+export type passwordCalculationsResult = Pick<ZXCVBNResult, 'score' | 'feedback'>;

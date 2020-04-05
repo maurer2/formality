@@ -31,6 +31,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { ZXCVBNResult } from 'zxcvbn';
 
 import Email from './Email.vue';
 import Password from './Password.vue';
@@ -62,13 +63,11 @@ export default Vue.extend({
   watch: {
     formValues: {
       handler(newFormValues) {
-        const { password, email } = newFormValues;
-        const passwordCalculations = passwordStrength.getPasswordStrength(password, email);
+        const { password, email }: { password: string; email: string } = newFormValues;
+        const passwordCalculations = passwordStrength.getPasswordStrength(password, [email]);
 
         const { score, feedback } = passwordCalculations;
         this.calculatedStrength = score;
-
-        console.log(score);
         // this.passwordFeedback = passwordCalculations.feedback;
       },
       deep: true,
