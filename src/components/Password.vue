@@ -1,6 +1,9 @@
 <template>
   <div class="field">
-    <label class="label" for="password">
+    <label
+      class="label"
+      for="password"
+    >
       <span class="text">
         Password
       </span>
@@ -10,21 +13,21 @@
     </label>
     <div class="input-group">
       <input
+        id="password"
         :type="fieldType"
         class="input"
         placeholder="Password"
-        id="password"
         name="password"
         autocomplete="off"
         :value="value"
         @input="updateValue"
-      />
+      >
       <button
         class="button"
         :class="{ 'button--is-disabled': toggleButtonIsDisabled }"
         type="button"
-        @click="toggleInputType"
         :disabled="toggleButtonIsDisabled"
+        @click="toggleInputType"
       >
         <template v-if="isObfuscated">
           <span class="visually-hidden">
@@ -45,7 +48,6 @@
       </button>
     </div>
   </div>
-
 </template>
 
 <script lang="ts">

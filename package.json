@@ -6,7 +6,7 @@
     "build": "vue-cli-service build",
     "cleanup": "sort-package-json",
     "lint:js": "vue-cli-service --no-fix lint",
-    "lint:js:fix": "vue-cli-service",
+    "lint:js:fix": "vue-cli-service lint",
     "lint:styles": "stylelint '**/*.{vue, css, scss}'; exit 0",
     "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'; exit 0",
     "serve": "vue-cli-service serve",

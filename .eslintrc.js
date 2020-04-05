@@ -6,7 +6,10 @@ module.exports = {
     browser: true,
   },
   extends: [
+    'eslint:recommended',
     'plugin:vue/essential',
+    'plugin:vue/recommended',
+    'plugin:vue/strongly-recommended',
     '@vue/airbnb',
     '@vue/typescript',
     '@vue/typescript/recommended',

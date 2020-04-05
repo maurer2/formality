@@ -1,22 +1,28 @@
 <template>
   <div class="indicator">
-    <label class="label" for="meter">
+    <label
+      class="label"
+      for="meter"
+    >
       <span class="text">
         Password strength
       </span>
-      <output class="output" for="meter" v-if="valueMapped">
+      <output
+        v-if="valueMapped"
+        class="output"
+        for="meter"
+      >
         <span>{{ valueMapped }}</span>
       </output>
     </label>
     <meter
+      id="meter"
       class="meter"
       :value="value"
       min="0"
       max="4"
-      id="meter"
     />
   </div>
-
 </template>
 
 <script lang="ts">

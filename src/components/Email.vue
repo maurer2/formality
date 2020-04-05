@@ -1,6 +1,9 @@
 <template>
   <div class="field">
-    <label class="label" for="email">
+    <label
+      class="label"
+      for="email"
+    >
       <span class="text">
         Email
       </span>
@@ -9,17 +12,16 @@
       </span>
     </label>
     <input
+      id="email"
       type="email"
       class="input"
       placeholder="E-Mail"
-      id="email"
       name="email"
       autocomplete="off"
       :value="value"
       @input="updateValue"
-    />
+    >
   </div>
-
 </template>
 
 <script lang="ts">

@@ -1,19 +1,25 @@
 <template>
   <form
     class="form"
+    novalidate="novalidate"
     @submit.prevent="handleSubmit"
     @reset.prevent="handleReset"
-    novalidate="novalidate"
   >
-    <Email v-model.trim="formValues.email"/>
+    <Email v-model.trim="formValues.email" />
 
-    <Password v-model.trim="formValues.password"/>
+    <Password v-model.trim="formValues.password" />
 
     <Indicator :value="calculatedStrength" />
 
     <div class="button-group">
-      <Button class="button" type="reset" />
-      <Button class="button" type="submit" />
+      <Button
+        class="button"
+        type="reset"
+      />
+      <Button
+        class="button"
+        type="submit"
+      />
     </div>
 
     <fieldset class="debug">
@@ -53,6 +59,21 @@ export default Vue.extend({
       passwordFeedback: {},
     };
   },
+  watch: {
+    formValues: {
+      handler(newFormValues) {
+        const { password, email } = newFormValues;
+        const passwordCalculations = passwordStrength.getPasswordStrength(password, email);
+
+        const { score, feedback } = passwordCalculations;
+        this.calculatedStrength = score;
+
+        console.log(score);
+        // this.passwordFeedback = passwordCalculations.feedback;
+      },
+      deep: true,
+    },
+  },
   methods: {
     handleReset(): void {
       console.log('reset');
@@ -73,21 +94,6 @@ export default Vue.extend({
     },
     handleSubmit(): void {
       console.log('submit');
-    },
-  },
-  watch: {
-    formValues: {
-      handler(newFormValues) {
-        const { password, email } = newFormValues;
-        const passwordCalculations = passwordStrength.getPasswordStrength(password, email);
-
-        const { score, feedback } = passwordCalculations;
-        this.calculatedStrength = score;
-
-        console.log(score);
-        // this.passwordFeedback = passwordCalculations.feedback;
-      },
-      deep: true,
     },
   },
 });
