@@ -1,4 +1,4 @@
-import Vue, { VNode } from 'vue';
+import Vue, { VNode, VueConstructor } from 'vue';
 
 declare global {
   namespace JSX {
@@ -10,4 +10,9 @@ declare global {
       [elem: string]: any;
     }
   }
+}
+
+declare module '*.svg' {
+  const content: VueConstructor<Vue>;
+  export default content;
 }

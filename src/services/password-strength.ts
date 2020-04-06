@@ -1,11 +1,19 @@
-import passwordStrengthCalculator, { ZXCVBNResult } from 'zxcvbn';
+import passwordStrengthCalculator from 'zxcvbn';
 
-export default {
-  getPasswordStrength(password: string, userInputs: string[] = []) {
-    const calculatedStrength = passwordStrengthCalculator(password, userInputs);
+export function getPasswordStrength(password: string, userInputs: string[] = []) {
+  const strength: CalculationResult = passwordStrengthCalculator(password, userInputs);
 
-    return calculatedStrength;
-  },
-};
+  return strength;
+}
 
-export type passwordCalculationsResult = Pick<ZXCVBNResult, 'score' | 'feedback'>;
+export type Score = 0 | 1 | 2 | 3 | 4;
+
+export interface Feedback {
+  warning: string;
+  suggestions: string[];
+}
+
+export interface CalculationResult {
+  score: Score;
+  feedback: Feedback;
+}

@@ -31,14 +31,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { ZXCVBNResult } from 'zxcvbn';
 
 import Email from './Email.vue';
 import Password from './Password.vue';
 import Button from './Button.vue';
 import Indicator from './Indicator.vue';
 
-import passwordStrength from '../services/password-strength';
+import { getPasswordStrength } from '../services/password-strength';
 
 export default Vue.extend({
   name: 'Form',
@@ -64,7 +63,7 @@ export default Vue.extend({
     formValues: {
       handler(newFormValues) {
         const { password, email }: { password: string; email: string } = newFormValues;
-        const passwordCalculations = passwordStrength.getPasswordStrength(password, [email]);
+        const passwordCalculations = getPasswordStrength(password, [email]);
 
         const { score, feedback } = passwordCalculations;
         this.calculatedStrength = score;
