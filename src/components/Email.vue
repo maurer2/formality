@@ -11,16 +11,25 @@
         {{ isValid ? '✓' : 'x' }}
       </span>
     </label>
-    <input
-      id="email"
-      type="email"
-      class="input"
-      placeholder="E-Mail"
-      name="email"
-      autocomplete="off"
-      :value="value"
-      @input="updateValue"
-    >
+    <div class="input-group">
+      <input
+        id="email"
+        type="email"
+        class="input"
+        placeholder="E-Mail"
+        name="email"
+        autocomplete="off"
+        :value="value"
+        @input="updateValue"
+      >
+      <button
+        v-if="showClearIcon"
+        class="input-addon-button"
+        @click="handleInputReset"
+      >
+        Clear
+      </button>
+    </div>
   </div>
 </template>
 
@@ -41,6 +50,12 @@ export default Vue.extend({
       hasBeenInteractedWith: false as boolean,
     };
   },
+  computed: {
+    showClearIcon(): boolean {
+      // hasBeenInteractedWith
+      return this.value.length > 0;
+    },
+  },
   methods: {
     updateValue(event: Event): void {
       const { target }: { target: EventTarget | null } = event;
@@ -53,7 +68,11 @@ export default Vue.extend({
 
       this.$emit('input', newValue);
     },
+    handleInputReset(): void {
+      this.$emit('input', '');
+    },
   },
+
 });
 </script>
 
@@ -62,6 +81,26 @@ export default Vue.extend({
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+}
+
+.input {
+  flex-basis: 100%;
+}
+
+.input-addon-button {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  flex-shrink: 0;
+  align-self: center;
+  cursor: pointer;
 }
 
 </style>
