@@ -47,11 +47,23 @@
         </template>
       </button>
     </div>
+    <div class="criterias">
+      <PasswordCriteria
+        text="Text"
+        :is-full-filled="true"
+      />
+      <PasswordCriteria
+        text="Text"
+        :is-full-filled="false"
+      />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+
+import PasswordCriteria from './Password-Criteria.vue';
 
 import EyeIcon from '../../public/eye.svg';
 import EyeDisabledIcon from '../../public/eye-disabled.svg';
@@ -59,6 +71,7 @@ import EyeDisabledIcon from '../../public/eye-disabled.svg';
 export default Vue.extend({
   name: 'Password',
   components: {
+    PasswordCriteria,
     EyeIcon,
     EyeDisabledIcon,
   },
