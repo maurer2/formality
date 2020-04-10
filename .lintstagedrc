@@ -1,0 +1,8 @@
+{
+  "*.{js,ts,vue}": "npm run lint:js:fix",
+  "*.{css,scss,vue}": "npm run lint:styles:fix",
+  "package.json": [
+    "npm run cleanup",
+    "git add"
+  ]
+}
