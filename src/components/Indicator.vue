@@ -18,10 +18,10 @@
     <meter
       id="meter"
       class="meter"
+      :class="meterClass"
       :value="value"
       min="0"
       max="4"
-      :style="meterOverlayStyle"
     />
   </div>
 </template>
@@ -57,16 +57,8 @@ export default Vue.extend({
     isDisabled(): boolean {
       return this.value === 0;
     },
-    meterOverlayStyle(): any {
-      const value = 100 * this.value;
-
-      console.log(value);
-
-      return {
-        cursor: 'pointer',
-      };
-
-      // return `${this.value}%`;
+    meterClass(): string {
+      return `meter--state-${this.value}`;
     },
   },
 });
@@ -97,6 +89,7 @@ $width-gutter: 0.75rem;
   overflow: hidden; // hide pseudo elements
 }
 
+// gray default bars with gutter
 .meter:before {
   position: absolute;
   content: '';
@@ -106,21 +99,44 @@ $width-gutter: 0.75rem;
   right: 0;
   background-image: linear-gradient(to right, gray 0%, gray calc(100% - #{$width-gutter}), transparent calc(100% - #{$width-gutter}), transparent 100%);
   //background-size: calc(#{percentage(1/3)} + #{$width-gutter});
-  background-size: calc(#{percentage(1/3)} + 0rem);
+  background-size: calc(#{percentage(1/4)} + 0rem);
 }
 
+// red active bars
 .meter:after {
   position: absolute;
-  left: 0;
+  left: -100%;
   top: 0;
   bottom: 0;
   right: 0;
+  width: 100%;
   // content: attr(value);
   content: '';
   // background-image: linear-gradient(to right, transparent 0%, transparent calc(50% - 0.75rem), blue calc(50% - 0.75rem), blue 50%, blue 100%);
   background-image: linear-gradient(to right, red 0%, red calc(100% - #{$width-gutter}), transparent calc(100% - #{$width-gutter}), transparent 100%);
   // background-size: calc(#{percentage(1/3)} + #{$width-gutter});
-  background-size: calc(#{percentage(1/3)} + 0rem);
+  background-size: calc(#{percentage(1/4)} + 0rem);
+  transform: translateX(0);
+  will-change: transform;
+}
+
+.meter--state-0:after {
+  transform: translateX(0);
+}
+
+.meter--state-1:after {
+  transform: translateX(calc(#{percentage(1/4)}));
+}
+
+.meter--state-2:after {
+  transform: translateX(calc(#{percentage(2/4)}));
+}
+.meter--state-3:after {
+  transform: translateX(calc(#{percentage(3/4)}));
+}
+
+.meter--state-4:after {
+  transform: translateX(100%);
 }
 
 .description {
