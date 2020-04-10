@@ -15,4 +15,9 @@ module.exports = {
       },
     ],
   },
+  ignoreFiles:
+    [
+      'node_modules',
+      '.lintstagedrc',
+    ],
 };

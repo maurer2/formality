@@ -54,9 +54,6 @@ export default Vue.extend({
 
       return valueMap[this.value];
     },
-    isDisabled(): boolean {
-      return this.value === 0;
-    },
     meterClass(): string {
       return `meter--state-${this.value}`;
     },
@@ -77,77 +74,63 @@ export default Vue.extend({
   margin-left: auto;
 }
 
-$width-gutter: 0.75rem;
-
 .meter {
+  $width-gutter: 0.75rem;
+  $number-of-bars: 4;
+
   position: relative;
   display: block;
   width: calc(100% + #{$width-gutter});
+  height: 5px;
   overflow: hidden; // hide pseudo elements
   appearance: none;
-}
 
-// gray default bars with gutter
-.meter::before {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  // eslint-disable-next-line
-  background-image:
-    linear-gradient(
-      to right,
-      gray 0%,
-      gray calc(100% - #{$width-gutter}),
-      transparent calc(100% - #{$width-gutter}),
-      transparent 100%
-    );
-  background-size: percentage(1/4);
-  content: '';
-}
+  &::before,
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-size: percentage(1 / $number-of-bars);
+    content: '';
+  }
 
-// red active bars
-.meter::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: -100%;
-  width: 100%;
-  // eslint-disable-next-line
-  background-image:
-    linear-gradient(
-      to right,
-      red 0%,
-      red calc(100% - #{$width-gutter}),
-      transparent calc(100% - #{$width-gutter}),
-      transparent 100%
-    );
-  background-size: percentage(1/4);
-  transform: translateX(0);
-  content: '';
-  will-change: transform;
-}
+  // gray default bar with gutter
+  &::before {
+    left: 0;
+    background-image:
+      linear-gradient(
+        to right,
+        gray 0%,
+        gray calc(100% - #{$width-gutter}),
+        transparent calc(100% - #{$width-gutter}),
+        transparent 100%
+      );
+  }
 
-.meter--state-0::after {
-  transform: translateX(0);
-}
+  // red active bar with gutter
+  &::after {
+    left: -100%;
+    background-image:
+      linear-gradient(
+        to right,
+        red 0%,
+        red calc(100% - #{$width-gutter}),
+        transparent calc(100% - #{$width-gutter}),
+        transparent 100%
+      );
+    transform: translateX(0);
+    will-change: transform;
+  }
 
-.meter--state-1::after {
-  transform: translateX(calc(#{percentage(1/4)}));
-}
+  @for $i from 0 through $number-of-bars {
+    $shift: percentage($i / $number-of-bars);
 
-.meter--state-2::after {
-  transform: translateX(calc(#{percentage(2/4)}));
-}
-
-.meter--state-3::after {
-  transform: translateX(calc(#{percentage(3/4)}));
-}
-
-.meter--state-4::after {
-  transform: translateX(100%);
+    &.meter--state-#{$i}::after {
+      transform: translateX(#{$shift});
+    }
+  }
 }
 
 .description {
