@@ -1,7 +1,7 @@
 <template>
   <p
     class="criteria"
-    :class="{ 'criteria--is-fullfilled': isFullFilled }"
+    :class="{ 'criteria--is-fullfilled': isFullfilled }"
   >
     <span class="icon">
       Icon
@@ -18,7 +18,7 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'PasswordCriteria',
   props: {
-    isFullFilled: {
+    isFullfilled: {
       type: Boolean,
       required: true,
       default: false,

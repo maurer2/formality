@@ -50,11 +50,11 @@
     <div class="criterias">
       <PasswordCriteria
         text="Text"
-        :is-full-filled="true"
+        :is-fullfilled="true"
       />
       <PasswordCriteria
         text="Text"
-        :is-full-filled="false"
+        :is-fullfilled="false"
       />
     </div>
   </div>
