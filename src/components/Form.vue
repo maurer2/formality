@@ -125,8 +125,8 @@ export default Vue.extend({
 
 .debug {
   display: block;
-  margin-top: 1.5rem;
   max-width: 50ch;
+  margin-top: 1.5rem;
   overflow: scroll;
 }
 

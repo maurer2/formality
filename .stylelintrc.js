@@ -5,7 +5,6 @@ module.exports = {
   ],
   rules: {
     'block-closing-brace-newline-before': 'always',
-    // 'selector-nested-pattern': '^&',
     'at-rule-no-unknown': null,
     'order/properties-order': [],
     'plugin/rational-order': [

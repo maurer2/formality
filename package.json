@@ -7,8 +7,8 @@
     "cleanup": "sort-package-json",
     "lint:js": "vue-cli-service --no-fix lint",
     "lint:js:fix": "vue-cli-service lint",
-    "lint:styles": "stylelint '**/*.{vue,css,scss}'; exit 0",
-    "lint:styles:fix": "stylelint --fix '**/*.{vue,css,scss}'; exit 0",
+    "lint:styles": "stylelint '**/*.{vue, css, scss}'",
+    "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'",
     "serve": "vue-cli-service serve",
     "start": "yarpm run serve",
     "test:unit": "vue-cli-service test:unit"

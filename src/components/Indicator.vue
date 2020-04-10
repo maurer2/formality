@@ -82,67 +82,78 @@ $width-gutter: 0.75rem;
 .meter {
   position: relative;
   display: block;
-  // width: 100%;
   width: calc(100% + #{$width-gutter});
-  // background: gray;
-  appearance: none;
   overflow: hidden; // hide pseudo elements
+  appearance: none;
 }
 
 // gray default bars with gutter
-.meter:before {
+.meter::before {
   position: absolute;
-  content: '';
-  left: 0;
   top: 0;
-  bottom: 0;
   right: 0;
-  background-image: linear-gradient(to right, gray 0%, gray calc(100% - #{$width-gutter}), transparent calc(100% - #{$width-gutter}), transparent 100%);
-  //background-size: calc(#{percentage(1/3)} + #{$width-gutter});
-  background-size: calc(#{percentage(1/4)} + 0rem);
+  bottom: 0;
+  left: 0;
+  // eslint-disable-next-line
+  background-image:
+    linear-gradient(
+      to right,
+      gray 0%,
+      gray calc(100% - #{$width-gutter}),
+      transparent calc(100% - #{$width-gutter}),
+      transparent 100%
+    );
+  background-size: percentage(1/4);
+  content: '';
 }
 
 // red active bars
-.meter:after {
+.meter::after {
   position: absolute;
-  left: -100%;
   top: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
+  left: -100%;
   width: 100%;
-  // content: attr(value);
-  content: '';
-  // background-image: linear-gradient(to right, transparent 0%, transparent calc(50% - 0.75rem), blue calc(50% - 0.75rem), blue 50%, blue 100%);
-  background-image: linear-gradient(to right, red 0%, red calc(100% - #{$width-gutter}), transparent calc(100% - #{$width-gutter}), transparent 100%);
-  // background-size: calc(#{percentage(1/3)} + #{$width-gutter});
-  background-size: calc(#{percentage(1/4)} + 0rem);
+  // eslint-disable-next-line
+  background-image:
+    linear-gradient(
+      to right,
+      red 0%,
+      red calc(100% - #{$width-gutter}),
+      transparent calc(100% - #{$width-gutter}),
+      transparent 100%
+    );
+  background-size: percentage(1/4);
   transform: translateX(0);
+  content: '';
   will-change: transform;
 }
 
-.meter--state-0:after {
+.meter--state-0::after {
   transform: translateX(0);
 }
 
-.meter--state-1:after {
+.meter--state-1::after {
   transform: translateX(calc(#{percentage(1/4)}));
 }
 
-.meter--state-2:after {
+.meter--state-2::after {
   transform: translateX(calc(#{percentage(2/4)}));
 }
-.meter--state-3:after {
+
+.meter--state-3::after {
   transform: translateX(calc(#{percentage(3/4)}));
 }
 
-.meter--state-4:after {
+.meter--state-4::after {
   transform: translateX(100%);
 }
 
 .description {
   display: flex;
-  margin: 0 0 7.5rem 0;
   flex-wrap: wrap;
+  margin: 0 0 7.5rem 0;
 }
 
 .key {
@@ -153,6 +164,5 @@ $width-gutter: 0.75rem;
   margin: 0;
   font-weight: bold;
 }
-
 
 </style>

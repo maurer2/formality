@@ -88,21 +88,21 @@ export default Vue.extend({
 }
 
 .input {
-  padding-right: 3rem;
   flex-basis: 100%;
+  padding-right: 3rem;
 }
 
 .input-addon-button {
   position: absolute;
   top: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
   padding: 0 0.5rem;
   border: 0;
-  background: transparent;
-  cursor: pointer;
   font-size: 0.85rem;
   line-height: 1;
+  background: transparent;
+  cursor: pointer;
 }
 
 </style>
