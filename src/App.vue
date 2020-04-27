@@ -77,7 +77,6 @@ export default Vue.extend({
 <style lang="scss">
 @import '~sanitize.css';
 @import '~sanitize.css/forms.css';
-// @import '~98.css';
 
 html {
   min-height: 100%;
@@ -110,8 +109,7 @@ body {
 <style lang="scss" scoped>
 .app {
   flex-grow: 1;
-  // dummy
-  max-width: 30rem;
+  max-width: 25rem;
   // min-height: inherit; // https://stackoverflow.com/a/43669966
   margin: auto;
 }

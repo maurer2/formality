@@ -1,5 +1,5 @@
 <template>
-  <div class="field">
+  <div class="field field-row field-row-stacked">
     <label
       class="label"
       for="email"
@@ -77,9 +77,11 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .field {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 1rem;
+}
+
+.label {
+  margin-left: 6px;
 }
 
 .input-group {

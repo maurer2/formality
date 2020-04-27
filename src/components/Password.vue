@@ -1,5 +1,5 @@
 <template>
-  <div class="field">
+  <div class="field field-row field-row-stacked">
     <label
       class="label"
       for="password"
@@ -118,9 +118,11 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .field {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 1rem;
+}
+
+.label {
+  margin-left: 6px;
 }
 
 .input-group {
@@ -134,9 +136,8 @@ export default Vue.extend({
 
 .button {
   flex-grow: 0;
-  padding: 2px;
   // all: unset;
-  // border: 1px solid #a0a0a0;
+  margin-top: 0;
 
   &--is-disabled {
     cursor: not-allowed;
