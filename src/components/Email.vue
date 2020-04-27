@@ -77,6 +77,7 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .field {
+  align-items: stretch;
   margin-bottom: 1rem;
 }
 
