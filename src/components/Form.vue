@@ -111,8 +111,6 @@ export default Vue.extend({
     min-content;
   width: 100%;
   margin: auto;
-  padding: 1.5rem;
-  border: 1px solid black;
 }
 
 .button-group {
