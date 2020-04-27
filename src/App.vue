@@ -23,6 +23,7 @@ export default Vue.extend({
 <style lang="scss">
 @import '~sanitize.css';
 @import '~sanitize.css/forms.css';
+// @import '~98.css';
 
 html {
   min-height: 100%;

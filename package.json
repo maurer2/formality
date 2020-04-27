@@ -17,6 +17,7 @@
     "minimist": "^1.2.2"
   },
   "dependencies": {
+    "98.css": "^0.1.11",
     "sanitize.css": "^11.0.0",
     "vue": "^2.6.11",
     "vue-svg-loader": "^0.16.0",

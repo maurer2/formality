@@ -1,6 +1,8 @@
 import Vue from 'vue';
-// include 'sanitize.css';
+
 import App from './App.vue';
+
+import '98.css';
 
 Vue.config.productionTip = false;
 
