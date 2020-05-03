@@ -1,40 +1,49 @@
 <template>
-  <div class="field field-row field-row-stacked">
-    <label
-      class="label"
-      for="email"
-    >
-      <span class="text">
-        Email
-      </span>
-      <span class="validity-icon">
-        {{ isValid ? '✓' : 'x' }}
-      </span>
-    </label>
-    <div class="input-group">
-      <input
-        id="email"
-        type="email"
-        class="input"
-        placeholder="E-Mail"
-        name="email"
-        autocomplete="off"
-        :value="value"
-        @input="updateValue"
+  <div class="wrapper">
+    <template v-if="!isValid">
+      <img
+        src="../assets/error.png"
+        class="validity-icon"
+        alt=""
       >
-      <button
-        v-if="showClearIcon"
-        class="input-addon-button"
-        @click="handleInputReset"
+    </template>
+    <div class="field field-row field-row-stacked">
+      <label
+        class="label"
+        for="email"
       >
-        Clear
-      </button>
+        <span class="text">
+          Email
+        </span>
+      </label>
+      <div class="input-group">
+        <input
+          id="email"
+          type="email"
+          class="input"
+          placeholder="E-Mail"
+          name="email"
+          autocomplete="off"
+          :value="value"
+          @input="updateValue"
+        >
+        <button
+          class="input-addon-button"
+          :disabled="clearIconIsEnabled"
+          @click="handleInputReset"
+        >
+          Clear
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+
+// eslint-disable-next-line no-useless-escape
+const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
 export default Vue.extend({
   name: 'Email',
@@ -46,14 +55,17 @@ export default Vue.extend({
   },
   data() {
     return {
-      isValid: true as boolean,
       hasBeenInteractedWith: false as boolean,
     };
   },
   computed: {
-    showClearIcon(): boolean {
-      return this.value.length > 0;
+    isValid(): boolean {
+      return emailRegex.test(this.value);
     },
+    clearIconIsEnabled(): boolean {
+      return !(this.value);
+    },
+
   },
   methods: {
     updateValue(event: Event): void {
@@ -76,9 +88,25 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.field {
-  align-items: stretch;
+.wrapper {
+  display: flex;
+  align-items: flex-start;
   margin-bottom: 1rem;
+}
+
+.validity-icon {
+  display: block;
+  align-self: center;
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.field {
+  align-items: flex-start;
 }
 
 .label {
@@ -91,15 +119,11 @@ export default Vue.extend({
 }
 
 .input {
-  flex-basis: 100%;
-  padding-right: 3rem;
+  margin-right: 1rem;
 }
 
 .input-addon-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  margin-top: 0;
   padding: 0 0.5rem;
   border: 0;
   font-size: 0.85rem;
