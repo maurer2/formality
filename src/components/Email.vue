@@ -28,8 +28,9 @@
           @input="updateValue"
         >
         <button
-          class="input-addon-button"
-          :disabled="clearIconIsEnabled"
+          class="clear-button"
+          :class="{'clear-button--is-disabled': clearButtonIsDisabled}"
+          :disabled="clearButtonIsDisabled"
           @click="handleInputReset"
         >
           Clear
@@ -62,8 +63,8 @@ export default Vue.extend({
     isValid(): boolean {
       return emailRegex.test(this.value);
     },
-    clearIconIsEnabled(): boolean {
-      return !(this.value);
+    clearButtonIsDisabled(): boolean {
+      return !this.value;
     },
 
   },
@@ -122,14 +123,18 @@ export default Vue.extend({
   margin-right: 1rem;
 }
 
-.input-addon-button {
+.clear-button {
   margin-top: 0;
   padding: 0 0.5rem;
   border: 0;
   font-size: 0.85rem;
   line-height: 1;
   background: transparent;
-  cursor: pointer;
+
+  &--is-disabled,
+  :not([disabled]) {
+    cursor: pointer;
+  }
 }
 
 </style>
