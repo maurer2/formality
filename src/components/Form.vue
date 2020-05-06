@@ -123,7 +123,6 @@ export default Vue.extend({
 
 .debug {
   display: block;
-  // max-width: 50ch;
   margin-top: 1.5rem;
   overflow: scroll;
   font-size: 16px;

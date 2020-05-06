@@ -1,61 +1,75 @@
 <template>
-  <div class="field field-row field-row-stacked">
-    <label
-      class="label"
-      for="password"
-    >
-      <span class="text">
-        Password
-      </span>
-      <span class="validity-icon">
-        {{ isValid ? '✓' : 'x' }}
-      </span>
-    </label>
-    <div class="input-group">
-      <input
-        id="password"
-        :type="fieldType"
-        class="input"
-        placeholder="Password"
-        name="password"
-        autocomplete="off"
-        :value="value"
-        @input="updateValue"
+  <div class="wrapper">
+    <template v-if="!isValid">
+      <img
+        src="../assets/error.png"
+        class="validity-icon"
+        alt=""
       >
-      <button
-        class="button"
-        :class="{ 'button--is-disabled': toggleButtonIsDisabled }"
-        type="button"
-        :disabled="toggleButtonIsDisabled"
-        @click="toggleInputType"
+    </template>
+    <div class="field field-row field-row-stacked">
+      <label
+        class="label"
+        for="password"
       >
-        <template v-if="isObfuscated">
-          <span class="visually-hidden">
-            Show password
-          </span>
-          <span class="icon">
-            <EyeIcon />
-          </span>
-        </template>
-        <template v-else>
-          <span class="visually-hidden">
-            Hide password
-          </span>
-          <span class="icon">
-            <EyeDisabledIcon />
-          </span>
-        </template>
-      </button>
-    </div>
-    <div class="criterias">
-      <PasswordCriteria
-        text="Text"
-        :is-fullfilled="true"
-      />
-      <PasswordCriteria
-        text="Text"
-        :is-fullfilled="false"
-      />
+        <span class="text">
+          Password
+        </span>
+      </label>
+      <div class="input-group">
+        <input
+          id="password"
+          :type="fieldType"
+          class="input"
+          placeholder="Password"
+          name="password"
+          autocomplete="off"
+          :value="value"
+          @input="updateValue"
+        >
+        <button
+          class="toggle-button"
+          :class="{ 'toggle-button--is-disabled': toggleButtonIsDisabled }"
+          type="button"
+          :disabled="toggleButtonIsDisabled"
+          @click="handleButtonToggle"
+        >
+          <template v-if="isObfuscated">
+            <span class="visually-hidden">
+              Show password
+            </span>
+            <span class="icon">
+              <EyeIcon />
+            </span>
+          </template>
+          <template v-else>
+            <span class="visually-hidden">
+              Hide password
+            </span>
+            <span class="icon">
+              <EyeDisabledIcon />
+            </span>
+          </template>
+        </button>
+        <button
+          class="clear-button"
+          :class="{'clear-button--is-disabled': clearButtonIsDisabled}"
+          :disabled="clearButtonIsDisabled"
+          @click="handleInputReset"
+        >
+          Clear
+        </button>
+      </div>
+      <div class="criteria">
+        <PasswordCriteria
+          text="Text"
+          :is-fullfilled="true"
+        />
+        <PasswordCriteria
+          text="Text"
+          :is-fullfilled="false"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -83,7 +97,6 @@ export default Vue.extend({
   },
   data() {
     return {
-      isValid: true as boolean,
       hasBeenInteractedWith: false as boolean,
       isObfuscated: true as boolean,
     };
@@ -92,13 +105,22 @@ export default Vue.extend({
     fieldType(): string {
       return (this.isObfuscated) ? 'password' : 'text';
     },
+    isValid(): boolean {
+      return false;
+    },
+    clearButtonIsDisabled(): boolean {
+      return !this.value;
+    },
     toggleButtonIsDisabled(): boolean {
-      return this.value === '';
+      return !this.value;
     },
   },
   methods: {
-    toggleInputType() {
+    handleButtonToggle() {
       this.isObfuscated = !this.isObfuscated;
+    },
+    handleInputReset(): void {
+      this.$emit('input', '');
     },
     updateValue(event: Event): void {
       const { target }: { target: EventTarget | null } = event;
@@ -117,9 +139,25 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.field {
-  align-items: stretch;
+.wrapper {
+  display: flex;
+  align-items: flex-start;
   margin-bottom: 1rem;
+}
+
+.validity-icon {
+  display: block;
+  align-self: top;
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.field {
+  align-items: flex-start;
 }
 
 .label {
@@ -135,7 +173,8 @@ export default Vue.extend({
   margin-right: 0.5rem;
 }
 
-.button {
+.toggle-button,
+.clear-button {
   flex-grow: 0;
   // all: unset;
   margin-top: 0;
