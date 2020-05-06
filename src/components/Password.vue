@@ -175,13 +175,16 @@ export default Vue.extend({
 
 .toggle-button,
 .clear-button {
-  flex-grow: 0;
-  // all: unset;
   margin-top: 0;
+  padding: 0 0.5rem;
+  border: 0;
+  font-size: 0.85rem;
+  line-height: 1;
+  background: transparent;
 
-  &--is-disabled {
-    cursor: not-allowed;
-    opacity: 0.25;
+  &--is-disabled,
+  :not([disabled]) {
+    cursor: pointer;
   }
 }
 
