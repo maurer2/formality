@@ -25,6 +25,7 @@
           name="password"
           autocomplete="off"
           :value="value"
+          size="25"
           @input="updateValue"
         >
         <button
@@ -61,11 +62,11 @@
         </button>
       </div>
       <div class="criteria">
-        <PasswordCriteria
+        <PasswordCriterion
           text="Text"
           :is-fullfilled="true"
         />
-        <PasswordCriteria
+        <PasswordCriterion
           text="Text"
           :is-fullfilled="false"
         />
@@ -77,7 +78,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import PasswordCriteria from './Password-Criteria.vue';
+import PasswordCriterion from './Password-Criterion.vue';
 
 import EyeIcon from '../../public/eye.svg';
 import EyeDisabledIcon from '../../public/eye-disabled.svg';
@@ -85,7 +86,7 @@ import EyeDisabledIcon from '../../public/eye-disabled.svg';
 export default Vue.extend({
   name: 'Password',
   components: {
-    PasswordCriteria,
+    PasswordCriterion,
     EyeIcon,
     EyeDisabledIcon,
   },
@@ -169,8 +170,7 @@ export default Vue.extend({
 }
 
 .input {
-  flex-grow: 1;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 
 .toggle-button,
@@ -178,7 +178,6 @@ export default Vue.extend({
   margin-top: 0;
   padding: 0 0.5rem;
   border: 0;
-  font-size: 0.85rem;
   line-height: 1;
   background: transparent;
 

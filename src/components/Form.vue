@@ -15,10 +15,12 @@
       <Button
         class="button"
         type="reset"
+        :is-disabled="!formIsValid"
       />
       <Button
         class="button"
         type="submit"
+        :is-disabled="!formIsValid"
       />
     </div>
 
@@ -115,10 +117,6 @@ export default Vue.extend({
 
 .button-group {
   display: flex;
-}
-
-.button {
-  flex: 1;
 }
 
 .debug {

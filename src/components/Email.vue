@@ -25,6 +25,7 @@
           name="email"
           autocomplete="off"
           :value="value"
+          size="25"
           @input="updateValue"
         >
         <button
@@ -66,7 +67,6 @@ export default Vue.extend({
     clearButtonIsDisabled(): boolean {
       return !this.value;
     },
-
   },
   methods: {
     updateValue(event: Event): void {
@@ -115,7 +115,6 @@ export default Vue.extend({
 }
 
 .input-group {
-  position: relative;
   display: flex;
 }
 
@@ -127,7 +126,6 @@ export default Vue.extend({
   margin-top: 0;
   padding: 0 0.5rem;
   border: 0;
-  font-size: 0.85rem;
   line-height: 1;
   background: transparent;
 

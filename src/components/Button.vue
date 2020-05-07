@@ -1,5 +1,10 @@
 <template>
-  <button :type="type">
+  <button
+    class="button"
+    :class="{'button--is-disabled': isDisabled}"
+    :type="type"
+    :disabled="isDisabled"
+  >
     <template v-if="isSubmitButton">
       Submit
     </template>
@@ -27,6 +32,11 @@ export default Vue.extend({
       type: String,
       required: true,
     },
+    isDisabled: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   computed: {
     isSubmitButton(): boolean {
@@ -38,8 +48,11 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.dummy {
-  color: red;
+.button {
+  &--is-disabled,
+  :not([disabled]) {
+    cursor: pointer;
+  }
 }
 
 </style>

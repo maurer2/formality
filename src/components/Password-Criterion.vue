@@ -16,7 +16,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'PasswordCriteria',
+  name: 'PasswordCriterion',
   props: {
     isFullfilled: {
       type: Boolean,

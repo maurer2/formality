@@ -1,44 +1,23 @@
 <template>
-  <div
-    id="app"
-    class="app"
-  >
+  <div id="app" class="app">
     <article class="wrapper window">
       <div class="title-bar">
         <div class="title-bar-text">
           Formality
         </div>
         <div class="title-bar-controls">
-          <button
-            aria-label="Minimize"
-            @click="handleMinimize"
-          >
-            <span class="visually-hidden">
-              Minimize
-            </span>
+          <button aria-label="Minimize" @click="handleMinimize">
+            <span class="visually-hidden">Minimize</span>
           </button>
-          <button
-            aria-label="Maximize"
-            @click="handleMaximize"
-          >
-            <span class="visually-hidden">
-              Maximize
-            </span>
+          <button aria-label="Maximize" @click="handleMaximize">
+            <span class="visually-hidden">Maximize</span>
           </button>
-          <button
-            aria-label="Close"
-            @click="handleClose"
-          >
-            <span class="visually-hidden">
-              Close
-            </span>
+          <button aria-label="Close" @click="handleClose">
+            <span class="visually-hidden">Close</span>
           </button>
         </div>
       </div>
-      <div
-        v-if="isMaximized"
-        class="window-body"
-      >
+      <div v-if="isMaximized" class="window-body">
         <Form />
       </div>
     </article>
@@ -75,8 +54,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '~sanitize.css';
-@import '~sanitize.css/forms.css';
+@import "~sanitize.css";
+@import "~sanitize.css/forms.css";
 
 html {
   min-height: 100%;
