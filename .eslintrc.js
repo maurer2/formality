@@ -45,4 +45,9 @@ module.exports = {
       },
     }],
   },
+  ignorePatterns: [
+    'shims-tsx.d.ts',
+    'shims-vue.d.ts',
+    'custom.d.ts',
+  ],
 };
