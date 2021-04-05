@@ -24,7 +24,7 @@
           placeholder="E-Mail"
           name="email"
           autocomplete="off"
-          :value="value"
+          :value="modelValue"
           size="25"
           @input="updateValue"
         >
@@ -42,15 +42,15 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/runtime-core';
 
 // eslint-disable-next-line no-useless-escape
 const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Email',
   props: {
-    value: {
+    modelValue: {
       type: String,
       required: true,
     },
@@ -62,15 +62,15 @@ export default Vue.extend({
   },
   computed: {
     isValid(): boolean {
-      return emailRegex.test(this.value);
+      return emailRegex.test(this.modelValue);
     },
     clearButtonIsDisabled(): boolean {
-      return !this.value;
+      return !this.modelValue;
     },
   },
   methods: {
     updateValue(event: Event): void {
-      const { target }: { target: EventTarget | null } = event;
+      const { target } = event;
 
       if (target === null) {
         return;
@@ -78,10 +78,10 @@ export default Vue.extend({
 
       const newValue: string = (target as HTMLInputElement).value;
 
-      this.$emit('input', newValue);
+      this.$emit('update:modelValue', newValue);
     },
     handleInputReset(): void {
-      this.$emit('input', '');
+      this.$emit('update:modelValue', '');
     },
   },
 

@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/runtime-core';
 
 const valueMap: { [key: string]: string} = {
   0: 'invalid',
@@ -37,7 +37,7 @@ const valueMap: { [key: string]: string} = {
   4: 'very strong',
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Indicator',
   props: {
     value: {

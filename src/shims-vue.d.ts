@@ -1,6 +1,6 @@
 
-import Vue, { VueConstructor } from 'vue';
+import Vue from 'vue';
 
-declare module '*.vue' {
+declare module "*.vue" {
   export default Vue;
 }

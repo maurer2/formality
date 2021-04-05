@@ -24,7 +24,7 @@
           placeholder="Password"
           name="password"
           autocomplete="off"
-          :value="value"
+          :value="modelValue"
           size="25"
           @input="updateValue"
         >
@@ -39,17 +39,13 @@
             <span class="visually-hidden">
               Show password
             </span>
-            <span class="icon">
-              <EyeIcon />
-            </span>
+            <EyeIcon class="icon" />
           </template>
           <template v-else>
             <span class="visually-hidden">
               Hide password
             </span>
-            <span class="icon">
-              <EyeDisabledIcon />
-            </span>
+            <EyeDisabledIcon class="icon"/>
           </template>
         </button>
         <button
@@ -76,14 +72,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/runtime-core';
 
 import PasswordCriterion from './Password-Criterion.vue';
 
 import EyeIcon from '../../public/eye.svg';
 import EyeDisabledIcon from '../../public/eye-disabled.svg';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Password',
   components: {
     PasswordCriterion,
@@ -91,7 +87,7 @@ export default Vue.extend({
     EyeDisabledIcon,
   },
   props: {
-    value: {
+    modelValue: {
       type: String,
       required: true,
     },
@@ -110,10 +106,10 @@ export default Vue.extend({
       return false;
     },
     clearButtonIsDisabled(): boolean {
-      return !this.value;
+      return !this.modelValue;
     },
     toggleButtonIsDisabled(): boolean {
-      return !this.value;
+      return !this.modelValue;
     },
   },
   methods: {
@@ -121,10 +117,10 @@ export default Vue.extend({
       this.isObfuscated = !this.isObfuscated;
     },
     handleInputReset(): void {
-      this.$emit('input', '');
+      this.$emit('update:modelValue', '');
     },
     updateValue(event: Event): void {
-      const { target }: { target: EventTarget | null } = event;
+      const { target } = event;
 
       if (target === null) {
         return;
@@ -132,7 +128,7 @@ export default Vue.extend({
 
       const newValue: string = (target as HTMLInputElement).value;
 
-      this.$emit('input', newValue);
+      this.$emit('update:modelValue', newValue);
     },
   },
 
@@ -184,6 +180,14 @@ export default Vue.extend({
   &--is-disabled,
   :not([disabled]) {
     cursor: pointer;
+  }
+
+  &:active {
+    padding: inherit;
+  }
+
+  .icon {
+    margin: 0;
   }
 }
 

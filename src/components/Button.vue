@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/runtime-core';
 
 type ButtonTypes = {
   submit: string;
@@ -25,7 +25,7 @@ type ButtonTypes = {
 
 type buttonType = Pick<ButtonTypes, 'submit' | 'reset'>;
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Button',
   props: {
     type: {
