@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/runtime-core';
 
 import Email from './Email.vue';
 import Password from './Password.vue';
@@ -41,7 +41,7 @@ import Indicator from './Indicator.vue';
 
 import { getPasswordStrength } from '../services/password-strength';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Form',
   components: {
     Button,

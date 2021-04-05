@@ -3,18 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
     "cleanup": "sort-package-json",
     "lint:js": "vue-cli-service --no-fix lint",
     "lint:js:fix": "vue-cli-service lint",
     "lint:styles": "stylelint '**/*.{vue, css, scss}'",
     "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'",
-    "serve": "vue-cli-service serve",
-    "start": "yarpm run serve",
-    "test:unit": "vue-cli-service test:unit"
-  },
-  "resolutions": {
-    "minimist": "^1.2.2"
+    "start": "yarpm run serve"
   },
   "dependencies": {
     "98.css": "^0.1.11",
@@ -22,8 +19,9 @@
     "@babel/core": "^7.13.14",
     "sanitize.css": "^11.0.0",
     "sass": "^1.32.8",
-    "vue": "^2.6.11",
-    "vue-svg-loader": "^0.16.0",
+    "vue": "^3.0.11",
+    "vue-loader": "^16.2.0",
+    "vue-svg-loader": "^0.17.0-beta.2",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
@@ -38,14 +36,15 @@
     "@vue/cli-plugin-typescript": "~4.2.0",
     "@vue/cli-plugin-unit-jest": "~4.2.0",
     "@vue/cli-service": "~4.2.0",
+    "@vue/compiler-sfc": "^3.0.11",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/eslint-config-typescript": "^5.0.1",
-    "@vue/test-utils": "1.0.0-beta.31",
+    "@vue/test-utils": "^2.0.0-alpha.1",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.10.0",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-vue": "^6.1.2",
+    "eslint-plugin-vue": "^7.0.0-alpha.0",
     "husky": ">=4",
     "lint-staged": ">=10",
     "normalize-scss": "^7.0.1",
@@ -56,9 +55,12 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.0.0",
     "typescript": "~3.7.5",
-    "vue-template-compiler": "^2.6.11",
+    "vue-cli-plugin-vue-next": "~0.1.4",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11",
     "yarpm": "^0.2.1"
+  },
+  "resolutions": {
+    "minimist": "^1.2.2"
   }
 }

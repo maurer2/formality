@@ -76,14 +76,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/runtime-core';
 
 import PasswordCriterion from './Password-Criterion.vue';
 
 import EyeIcon from '../../public/eye.svg';
 import EyeDisabledIcon from '../../public/eye-disabled.svg';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Password',
   components: {
     PasswordCriterion,

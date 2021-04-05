@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/runtime-core';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PasswordCriterion',
   props: {
     isFullfilled: {
