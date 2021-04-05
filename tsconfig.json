@@ -36,5 +36,5 @@
     "node_modules",
     ".lintstagedrc"
   ],
-  "files": ["ts-shim.d.ts"]
+  "files": ["src/shims-vue.d.ts"]
 }

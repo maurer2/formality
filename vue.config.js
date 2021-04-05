@@ -1,8 +1,9 @@
 /* eslint-disable global-require */
+const sass = require('sass')
+
 module.exports = {
   lintOnSave: false,
   chainWebpack: (config) => {
-    // SVG Loader
     const svgRule = config.module.rule('svg');
 
     svgRule.uses.clear();
@@ -20,7 +21,7 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        implementation: require('sass'),
+        implementation: sass,
       },
     },
   },

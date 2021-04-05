@@ -11,7 +11,8 @@
     "lint:js:fix": "vue-cli-service lint",
     "lint:styles": "stylelint '**/*.{vue, css, scss}'",
     "lint:styles:fix": "stylelint --fix '**/*.{vue, css, scss}'",
-    "start": "yarpm run serve"
+    "start": "yarpm run serve",
+    "husky-run": "yarpm run lint:js"
   },
   "dependencies": {
     "98.css": "^0.1.12",
@@ -62,5 +63,10 @@
   },
   "resolutions": {
     "minimist": "^1.2.2"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "vue-cli-service lint"
+    ]
   }
 }
