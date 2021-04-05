@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 module.exports = {
   lintOnSave: false,
   chainWebpack: (config) => {
@@ -12,5 +13,12 @@ module.exports = {
       .end()
       .use('vue-svg-loader')
       .loader('vue-svg-loader');
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        implementation: require('sass'),
+      },
+    },
   },
 };
