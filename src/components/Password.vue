@@ -40,7 +40,8 @@
               Show password
             </span>
             <span class="icon">
-              <EyeIcon />
+              <!-- <EyeIcon /> -->
+              Show
             </span>
           </template>
           <template v-else>
@@ -48,7 +49,8 @@
               Hide password
             </span>
             <span class="icon">
-              <EyeDisabledIcon />
+              <!-- <EyeDisabledIcon /> -->
+              Hide
             </span>
           </template>
         </button>
