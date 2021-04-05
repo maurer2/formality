@@ -14,7 +14,7 @@
     "start": "yarpm run serve"
   },
   "dependencies": {
-    "98.css": "^0.1.11",
+    "98.css": "^0.1.12",
     "@babel/cli": "^7.13.14",
     "@babel/core": "^7.13.14",
     "sanitize.css": "^11.0.0",

@@ -39,19 +39,13 @@
             <span class="visually-hidden">
               Show password
             </span>
-            <span class="icon">
-              <!-- <EyeIcon /> -->
-              Show
-            </span>
+            <EyeIcon class="icon" />
           </template>
           <template v-else>
             <span class="visually-hidden">
               Hide password
             </span>
-            <span class="icon">
-              <!-- <EyeDisabledIcon /> -->
-              Hide
-            </span>
+            <EyeDisabledIcon class="icon"/>
           </template>
         </button>
         <button
@@ -186,6 +180,14 @@ export default defineComponent({
   &--is-disabled,
   :not([disabled]) {
     cursor: pointer;
+  }
+
+  &:active {
+    padding: inherit;
+  }
+
+  .icon {
+    margin: 0;
   }
 }
 

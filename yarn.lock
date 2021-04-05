@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"98.css@^0.1.11":
+"98.css@^0.1.12":
   version "0.1.16"
   resolved "https://registry.yarnpkg.com/98.css/-/98.css-0.1.16.tgz#7e1d0ccf07e6c8ce69109fbb8fa5a530adab246d"
   integrity sha512-oRHyT905tHb0XOHa3nOjH6meDMedNwR4Jc3wYTUAykCjyFXsUGMQhxvlxuBarvLk/jmZb1Cu4YBDIXADxAt5BA==

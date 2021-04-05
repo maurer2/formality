@@ -11,6 +11,9 @@ module.exports = {
       .use('babel-loader')
       .loader('babel-loader')
       .end()
+      .use('vue-loader')
+      .loader('vue-loader')
+      .end()
       .use('vue-svg-loader')
       .loader('vue-svg-loader');
   },
