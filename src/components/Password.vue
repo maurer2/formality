@@ -24,7 +24,7 @@
           placeholder="Password"
           name="password"
           autocomplete="off"
-          :value="value"
+          :value="modelValue"
           size="25"
           @input="updateValue"
         >
@@ -91,7 +91,7 @@ export default defineComponent({
     EyeDisabledIcon,
   },
   props: {
-    value: {
+    modelValue: {
       type: String,
       required: true,
     },
@@ -110,10 +110,10 @@ export default defineComponent({
       return false;
     },
     clearButtonIsDisabled(): boolean {
-      return !this.value;
+      return !this.modelValue;
     },
     toggleButtonIsDisabled(): boolean {
-      return !this.value;
+      return !this.modelValue;
     },
   },
   methods: {
@@ -121,10 +121,10 @@ export default defineComponent({
       this.isObfuscated = !this.isObfuscated;
     },
     handleInputReset(): void {
-      this.$emit('input', '');
+      this.$emit('update:modelValue', '');
     },
     updateValue(event: Event): void {
-      const { target }: { target: EventTarget | null } = event;
+      const { target } = event;
 
       if (target === null) {
         return;
@@ -132,7 +132,7 @@ export default defineComponent({
 
       const newValue: string = (target as HTMLInputElement).value;
 
-      this.$emit('input', newValue);
+      this.$emit('update:modelValue', newValue);
     },
   },
 

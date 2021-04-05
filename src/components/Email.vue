@@ -24,7 +24,7 @@
           placeholder="E-Mail"
           name="email"
           autocomplete="off"
-          :value="value"
+          :value="modelValue"
           size="25"
           @input="updateValue"
         >
@@ -50,7 +50,7 @@ const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]
 export default defineComponent({
   name: 'Email',
   props: {
-    value: {
+    modelValue: {
       type: String,
       required: true,
     },
@@ -62,15 +62,15 @@ export default defineComponent({
   },
   computed: {
     isValid(): boolean {
-      return emailRegex.test(this.value);
+      return emailRegex.test(this.modelValue);
     },
     clearButtonIsDisabled(): boolean {
-      return !this.value;
+      return !this.modelValue;
     },
   },
   methods: {
     updateValue(event: Event): void {
-      const { target }: { target: EventTarget | null } = event;
+      const { target } = event;
 
       if (target === null) {
         return;
@@ -78,10 +78,10 @@ export default defineComponent({
 
       const newValue: string = (target as HTMLInputElement).value;
 
-      this.$emit('input', newValue);
+      this.$emit('update:modelValue', newValue);
     },
     handleInputReset(): void {
-      this.$emit('input', '');
+      this.$emit('update:modelValue', '');
     },
   },
 
