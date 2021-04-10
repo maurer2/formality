@@ -5,7 +5,7 @@
     @submit.prevent="handleSubmit"
     @reset.prevent="handleReset"
   >
-    <Email v-model.trim="formValues.email" />
+    <Email v-model.gmail.trim="formValues.email" />
 
     <Password v-model.trim="formValues.password" />
 

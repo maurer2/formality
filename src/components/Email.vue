@@ -54,7 +54,11 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    modelModifiers: {
+      default: () => {}
+    }
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       hasBeenInteractedWith: false as boolean,
@@ -62,6 +66,9 @@ export default defineComponent({
   },
   computed: {
     isValid(): boolean {
+      if (this.modelValue === undefined) {
+        return false
+      }
       return emailRegex.test(this.modelValue);
     },
     clearButtonIsDisabled(): boolean {
@@ -76,7 +83,11 @@ export default defineComponent({
         return;
       }
 
-      const newValue: string = (target as HTMLInputElement).value;
+      let newValue = (target as HTMLInputElement).value;
+
+      if ('gmail' in (this.modelModifiers as any)) {
+        newValue = newValue.replace(/googlemail/ig, 'gmail')
+      }
 
       this.$emit('update:modelValue', newValue);
     },
