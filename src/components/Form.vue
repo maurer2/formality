@@ -65,10 +65,10 @@ export default defineComponent({
     formValues: {
       handler(newFormValues) {
         const { password, email }: { password: string; email: string } = newFormValues;
-        const passwordCalculations = getPasswordStrength(password);
+        // const passwordCalculations = getPasswordStrength(password);
 
-        const { score, feedback } = passwordCalculations;
-        this.calculatedStrength = score;
+        // const { score, feedback } = passwordCalculations;
+        // this.calculatedStrength = score;
         // this.passwordFeedback = passwordCalculations.feedback;
       },
       deep: true,
