@@ -79,70 +79,69 @@ import EyeIcon from '../../public/eye.svg';
 import EyeDisabledIcon from '../../public/eye-disabled.svg';
 
 export default defineComponent({
-    name: 'Password',
-    components: {
-        PasswordCriterion,
-        EyeIcon,
-        EyeDisabledIcon,
+  name: 'Password',
+  components: {
+    PasswordCriterion,
+    EyeIcon,
+    EyeDisabledIcon,
+  },
+  props: {
+    modelValue: {
+      type: String,
+      required: true,
     },
-    props: {
-        modelValue: {
-            type: String,
-            required: true,
-        },
-        modelModifiers: {
-            type: Object,
-            default: () => { /**/ },
-        },
+    modelModifiers: {
+      type: Object,
+      default: () => { /**/ },
     },
-    emits: ['update:modelValue'],
+  },
+  emits: ['update:modelValue'],
 
-    data() {
-        return {
-            isObfuscated: true,
-            isDirty: false,
-            validationRules: [],
-        };
+  data() {
+    return {
+      isObfuscated: true,
+      isDirty: false,
+      validationRules: [],
+    };
+  },
+  computed: {
+    fieldType(): string {
+      return (this.isObfuscated) ? 'password' : 'text';
     },
-    computed: {
-        fieldType(): string {
-            return (this.isObfuscated) ? 'password' : 'text';
-        },
-        isValid(): boolean {
-            return true;
-        },
-        clearButtonIsDisabled(): boolean {
-            return !this.modelValue;
-        },
-        toggleButtonIsDisabled(): boolean {
-            return !this.modelValue;
-        },
-        showErrors(): boolean {
-            return this.isDirty && !this.isValid;
-        },
+    isValid(): boolean {
+      return true;
     },
-    methods: {
-        updateValue(event: Event): void {
-            const { target } = event;
-
-            if (target === null) {
-                return;
-            }
-
-            const newValue: string = (target as HTMLInputElement).value;
-
-            this.$emit('update:modelValue', newValue);
-            this.isDirty = true;
-        },
-        resetValue(): void {
-            this.$emit('update:modelValue', '');
-            this.isDirty = false;
-        },
-        handleButtonToggle() {
-            this.isObfuscated = !this.isObfuscated;
-        },
+    clearButtonIsDisabled(): boolean {
+      return !this.modelValue;
     },
+    toggleButtonIsDisabled(): boolean {
+      return !this.modelValue;
+    },
+    showErrors(): boolean {
+      return this.isDirty && !this.isValid;
+    },
+  },
+  methods: {
+    updateValue(event: Event): void {
+      const { target } = event;
 
+      if (target === null) {
+        return;
+      }
+
+      const newValue: string = (target as HTMLInputElement).value;
+
+      this.$emit('update:modelValue', newValue);
+      this.isDirty = true;
+    },
+    resetValue(): void {
+      this.$emit('update:modelValue', '');
+      this.isDirty = false;
+    },
+    handleButtonToggle() {
+      this.isObfuscated = !this.isObfuscated;
+    },
+  },
 });
 </script>
 

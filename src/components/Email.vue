@@ -46,60 +46,60 @@ import { defineComponent } from '@vue/runtime-core';
 const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
 export default defineComponent({
-    name: 'Email',
-    props: {
-        modelValue: {
-            type: String,
-            required: true,
-        },
-        modelModifiers: {
-            type: Object,
-            default: () => { /**/ },
-        },
+  name: 'Email',
+  props: {
+    modelValue: {
+      type: String,
+      required: true,
     },
-    emits: ['update:modelValue'],
-    data() {
-        return {
-            isDirty: false,
-            validationRules: [],
-        };
+    modelModifiers: {
+      type: Object,
+      default: () => { /**/ },
     },
-    computed: {
-        isValid(): boolean {
-            return emailRegex.test(this.modelValue);
-        },
-        clearButtonIsDisabled(): boolean {
-            return !this.modelValue;
-        },
-        showErrors(): boolean {
-            return this.isDirty && !this.isValid;
-        },
+  },
+  emits: ['update:modelValue'],
+  data() {
+    return {
+      isDirty: false,
+      validationRules: [],
+    };
+  },
+  computed: {
+    isValid(): boolean {
+      return emailRegex.test(this.modelValue);
     },
-    mounted() {
-        this.isDirty = false;
+    clearButtonIsDisabled(): boolean {
+      return !this.modelValue;
     },
-    methods: {
-        updateValue(event: InputEvent): void {
-            const { target } = event;
+    showErrors(): boolean {
+      return this.isDirty && !this.isValid;
+    },
+  },
+  mounted() {
+    this.isDirty = false;
+  },
+  methods: {
+    updateValue(event: InputEvent): void {
+      const { target } = event;
 
-            if (target === null) {
-                return;
-            }
+      if (target === null) {
+        return;
+      }
 
-            let newValue = (target as HTMLInputElement).value;
+      let newValue = (target as HTMLInputElement).value;
 
-            if ('gmail' in (this.modelModifiers as any)) {
-                newValue = newValue.replace(/googlemail/ig, 'gmail');
-            }
+      if ('gmail' in (this.modelModifiers as any)) {
+        newValue = newValue.replace(/googlemail/ig, 'gmail');
+      }
 
-            this.$emit('update:modelValue', newValue);
-            this.isDirty = true;
-        },
-        resetValue(): void {
-            this.$emit('update:modelValue', '');
-            this.isDirty = false;
-        },
+      this.$emit('update:modelValue', newValue);
+      this.isDirty = true;
     },
+    resetValue(): void {
+      this.$emit('update:modelValue', '');
+      this.isDirty = false;
+    },
+  },
 });
 </script>
 
