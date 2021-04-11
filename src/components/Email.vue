@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper">
-    <template v-if="!isValid">
-      <img
-        src="../assets/error.png"
-        class="validity-icon"
-        alt=""
-      >
-    </template>
+    <img
+      v-if="showErrors"
+      src="../assets/error.png"
+      class="validity-icon"
+      alt=""
+    />
+
     <div class="field field-row field-row-stacked">
       <label
         class="label"
@@ -22,17 +22,16 @@
           type="email"
           class="input"
           placeholder="E-Mail"
-          name="email"
           autocomplete="off"
           :value="modelValue"
           size="25"
-          @input="updateValue"
+          @change="updateValue"
         >
         <button
           class="clear-button"
           :class="{'clear-button--is-disabled': clearButtonIsDisabled}"
           :disabled="clearButtonIsDisabled"
-          @click="handleInputReset"
+          @click="resetValue"
         >
           Clear
         </button>
@@ -61,22 +60,22 @@ export default defineComponent({
   emits: ['update:modelValue'],
   data() {
     return {
-      hasBeenInteractedWith: false as boolean,
+      isDirty: false,
     };
   },
   computed: {
     isValid(): boolean {
-      if (this.modelValue === undefined) {
-        return false
-      }
       return emailRegex.test(this.modelValue);
     },
     clearButtonIsDisabled(): boolean {
       return !this.modelValue;
     },
+    showErrors(): boolean {
+      return this.isDirty && !this.isValid
+    }
   },
   methods: {
-    updateValue(event: Event): void {
+    updateValue(event: InputEvent): void {
       const { target } = event;
 
       if (target === null) {
@@ -90,12 +89,16 @@ export default defineComponent({
       }
 
       this.$emit('update:modelValue', newValue);
+      this.isDirty = true
     },
-    handleInputReset(): void {
+    resetValue(): void {
       this.$emit('update:modelValue', '');
+      this.isDirty = false
     },
   },
-
+  mounted() {
+    this.isDirty = false
+  },
 });
 </script>
 
