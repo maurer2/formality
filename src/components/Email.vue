@@ -5,7 +5,7 @@
       src="../assets/error.png"
       class="validity-icon"
       alt=""
-    />
+    >
 
     <div class="field field-row field-row-stacked">
       <label
@@ -43,7 +43,6 @@
 <script lang="ts">
 import { defineComponent } from '@vue/runtime-core';
 
-// eslint-disable-next-line no-useless-escape
 const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
 export default defineComponent({
@@ -54,8 +53,9 @@ export default defineComponent({
       required: true,
     },
     modelModifiers: {
-      default: () => {}
-    }
+      type: Object,
+      default: () => { /**/ },
+    },
   },
   emits: ['update:modelValue'],
   data() {
@@ -71,8 +71,11 @@ export default defineComponent({
       return !this.modelValue;
     },
     showErrors(): boolean {
-      return this.isDirty && !this.isValid
-    }
+      return this.isDirty && !this.isValid;
+    },
+  },
+  mounted() {
+    this.isDirty = false;
   },
   methods: {
     updateValue(event: InputEvent): void {
@@ -85,19 +88,16 @@ export default defineComponent({
       let newValue = (target as HTMLInputElement).value;
 
       if ('gmail' in (this.modelModifiers as any)) {
-        newValue = newValue.replace(/googlemail/ig, 'gmail')
+        newValue = newValue.replace(/googlemail/ig, 'gmail');
       }
 
       this.$emit('update:modelValue', newValue);
-      this.isDirty = true
+      this.isDirty = true;
     },
     resetValue(): void {
       this.$emit('update:modelValue', '');
-      this.isDirty = false
+      this.isDirty = false;
     },
-  },
-  mounted() {
-    this.isDirty = false
   },
 });
 </script>

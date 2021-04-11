@@ -5,6 +5,7 @@
     @submit.prevent="handleSubmit"
     @reset.prevent="handleReset"
   >
+    <!-- eslint-disable -->
     <Email v-model.gmail.trim="formValues.email" />
 
     <Password v-model.trim="formValues.password" />

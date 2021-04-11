@@ -44,7 +44,7 @@ module.exports = {
         allowFirstLine: false,
       },
     }],
-    'vue/no-custom-modifiers-on-v-model': 'off',
+    // 'vue/no-custom-modifiers-on-v-model': 'off',
   },
   ignorePatterns: [
     'shims-tsx.d.ts',
