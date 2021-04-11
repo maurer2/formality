@@ -1,12 +1,12 @@
 <template>
   <div class="wrapper">
-    <template v-if="!isValid">
-      <img
-        src="../assets/error.png"
-        class="validity-icon"
-        alt=""
-      >
-    </template>
+    <img
+      v-if="showErrors"
+      src="../assets/error.png"
+      class="validity-icon"
+      alt=""
+    >
+
     <div class="field field-row field-row-stacked">
       <label
         class="label"
@@ -16,13 +16,12 @@
           Password
         </span>
       </label>
-      <div class="input-group">
+      <div class="input-button-group">
         <input
           id="password"
           :type="fieldType"
           class="input"
-          placeholder="Password"
-          name="password"
+          placeholder="Enter password"
           autocomplete="off"
           :value="modelValue"
           size="25"
@@ -45,14 +44,14 @@
             <span class="visually-hidden">
               Hide password
             </span>
-            <EyeDisabledIcon class="icon"/>
+            <EyeDisabledIcon class="icon" />
           </template>
         </button>
         <button
           class="clear-button"
           :class="{'clear-button--is-disabled': clearButtonIsDisabled}"
           :disabled="clearButtonIsDisabled"
-          @click="handleInputReset"
+          @click="resetValue"
         >
           Clear
         </button>
@@ -80,57 +79,69 @@ import EyeIcon from '../../public/eye.svg';
 import EyeDisabledIcon from '../../public/eye-disabled.svg';
 
 export default defineComponent({
-  name: 'Password',
-  components: {
-    PasswordCriterion,
-    EyeIcon,
-    EyeDisabledIcon,
-  },
-  props: {
-    modelValue: {
-      type: String,
-      required: true,
+    name: 'Password',
+    components: {
+        PasswordCriterion,
+        EyeIcon,
+        EyeDisabledIcon,
     },
-  },
-  data() {
-    return {
-      hasBeenInteractedWith: false as boolean,
-      isObfuscated: true as boolean,
-    };
-  },
-  computed: {
-    fieldType(): string {
-      return (this.isObfuscated) ? 'password' : 'text';
+    props: {
+        modelValue: {
+            type: String,
+            required: true,
+        },
+        modelModifiers: {
+            type: Object,
+            default: () => { /**/ },
+        },
     },
-    isValid(): boolean {
-      return false;
-    },
-    clearButtonIsDisabled(): boolean {
-      return !this.modelValue;
-    },
-    toggleButtonIsDisabled(): boolean {
-      return !this.modelValue;
-    },
-  },
-  methods: {
-    handleButtonToggle() {
-      this.isObfuscated = !this.isObfuscated;
-    },
-    handleInputReset(): void {
-      this.$emit('update:modelValue', '');
-    },
-    updateValue(event: Event): void {
-      const { target } = event;
+    emits: ['update:modelValue'],
 
-      if (target === null) {
-        return;
-      }
-
-      const newValue: string = (target as HTMLInputElement).value;
-
-      this.$emit('update:modelValue', newValue);
+    data() {
+        return {
+            isObfuscated: true,
+            isDirty: false,
+            validationRules: [],
+        };
     },
-  },
+    computed: {
+        fieldType(): string {
+            return (this.isObfuscated) ? 'password' : 'text';
+        },
+        isValid(): boolean {
+            return true;
+        },
+        clearButtonIsDisabled(): boolean {
+            return !this.modelValue;
+        },
+        toggleButtonIsDisabled(): boolean {
+            return !this.modelValue;
+        },
+        showErrors(): boolean {
+            return this.isDirty && !this.isValid;
+        },
+    },
+    methods: {
+        updateValue(event: Event): void {
+            const { target } = event;
+
+            if (target === null) {
+                return;
+            }
+
+            const newValue: string = (target as HTMLInputElement).value;
+
+            this.$emit('update:modelValue', newValue);
+            this.isDirty = true;
+        },
+        resetValue(): void {
+            this.$emit('update:modelValue', '');
+            this.isDirty = false;
+        },
+        handleButtonToggle() {
+            this.isObfuscated = !this.isObfuscated;
+        },
+    },
 
 });
 </script>

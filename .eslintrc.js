@@ -32,9 +32,10 @@ module.exports = {
       },
     ],
     indent: [
-      'error',
+      'off',
       2,
     ],
+    "@typescript-eslint/indent": ["error"],
     'lines-between-class-members': 'off',
     'class-methods-use-this': 'off',
     'vue/max-attributes-per-line': ['error', {

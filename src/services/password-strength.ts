@@ -1,12 +1,11 @@
-import { zxcvbn } from '@zxcvbn-ts/core'
-
+import { zxcvbn } from '@zxcvbn-ts/core';
 
 export function getPasswordStrength(password: string, userInputs: string[] = []): number {
   if (!password.length) {
-    return 0
+    return 0;
   }
 
-  const {score} = zxcvbn(password);
+  const { score } = zxcvbn(password);
 
   return score;
 }
