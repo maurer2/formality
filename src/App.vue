@@ -38,7 +38,6 @@ export default defineComponent({
   },
   methods: {
     handleMinimize() {
-      console.log('handleMinimize');
       this.isMaximized = false;
     },
     handleMaximize() {
@@ -54,6 +53,8 @@ export default defineComponent({
 <style lang="scss">
 @import "~sanitize.css";
 @import "~sanitize.css/forms.css";
+@import "~98.css";
+@import "./css/98.css/custom-properties.css";
 
 html {
   min-height: 100%;
