@@ -24,7 +24,6 @@
         :is-disabled="!formIsValid"
       />
     </div>
-
     <fieldset class="debug">
       <legend>Debug:</legend>
       <output class="output">{{ $data }}</output>
@@ -104,28 +103,37 @@ export default defineComponent({
   display: grid;
   grid-auto-rows: auto;
   grid-auto-columns: 1fr;
-  grid-auto-flow: row;
+  grid-auto-flow: row dense;
+
+  /*
   grid-template-areas:
-    "email-field email-field"
-    "password-field password-field"
-    "indicator indicator"
-    "form-buttons form-buttons";
+    "email-field ."
+    "password-field ."
+    "indicator ."
+    "form-buttons .";
   grid-template-rows:
     auto
     auto
     auto
     auto;
-  grid-template-columns: 1fr 1fr;
+  */
+  //grid-template-columns: minmax(auto, 250px) 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 .button-group {
   display: flex;
-  grid-area: form-buttons;
+  align-self: start;
+  // grid-area: form-buttons;
+
+  .button {
+    flex-grow: 1;
+  }
 }
 
 .debug {
   display: block;
-  grid-column: 1/-1;
+  // grid-column: 1/-1;
   margin-top: 1.5rem;
   overflow: scroll;
   font-size: 16px;

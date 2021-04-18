@@ -56,6 +56,10 @@ export default defineComponent({
 @import "~98.css";
 @import "./css/98.css/custom-properties.css";
 
+:root {
+  --max-container-width: 35rem;
+}
+
 html {
   min-height: 100%;
   font-size: 16px;
@@ -81,7 +85,9 @@ body {
 }
 
 #root {
-  width: clamp(25rem, 50vw, 35rem);
+  width: calc(100% - 2rem); // temp
+  // width: clamp(25rem, 50vw, var(--max-container-width));
+  margin: 1rem;
 }
 
 </style>
