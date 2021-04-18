@@ -1,5 +1,5 @@
 <template>
-  <article class="wrapper window">
+  <article class="window">
     <div class="title-bar">
       <div class="title-bar-text">
         Formality
@@ -59,17 +59,14 @@ export default defineComponent({
 html {
   min-height: 100%;
   font-size: 16px;
-  background: #c0c0c0;
+  background: var(--surface);
 }
 
 body {
-  display: flex;
+  display: grid;
+  place-items: center;
   min-height: 100vh;
-  padding: 2.5rem;
   overflow-y: scroll;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .visually-hidden {
@@ -83,12 +80,11 @@ body {
   clip: rect(0 0 0 0);
 }
 
-.app {
-  flex-grow: 1;
-  max-width: 25rem;
+#root {
+  width: clamp(25rem, 50vw, 35rem);
   // min-height: inherit; // https://stackoverflow.com/a/43669966
-  margin: auto;
 }
+
 </style>
 
 <style lang="scss" scoped>
