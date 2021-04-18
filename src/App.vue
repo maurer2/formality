@@ -82,11 +82,6 @@ body {
 
 #root {
   width: clamp(25rem, 50vw, 35rem);
-  // min-height: inherit; // https://stackoverflow.com/a/43669966
 }
-
-</style>
-
-<style lang="scss" scoped>
 
 </style>

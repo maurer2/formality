@@ -102,33 +102,33 @@ export default defineComponent({
 <style scoped lang="scss">
 .form {
   display: grid;
+  grid-auto-rows: auto;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: row;
   grid-template-areas:
     "email-field email-field"
     "password-field password-field"
     "indicator indicator"
     "form-buttons form-buttons";
-  grid-template-columns: 1fr 1fr;
   grid-template-rows:
     auto
     auto
     auto
     auto;
-  grid-auto-columns: 1fr;
-  grid-auto-rows: auto;
-  grid-auto-flow: row;
+  grid-template-columns: 1fr 1fr;
 }
 
 .button-group {
   display: flex;
-   grid-area: form-buttons;
+  grid-area: form-buttons;
 }
 
 .debug {
   display: block;
+  grid-column: 1/-1;
   margin-top: 1.5rem;
   overflow: scroll;
   font-size: 16px;
-  grid-column: 1/-1;
 }
 
 .output {
