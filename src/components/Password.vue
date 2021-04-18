@@ -148,6 +148,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .wrapper {
   display: flex;
+  // grid-row: 2;
+  grid-column: 1;
   // grid-area: password-field;
   align-items: flex-start;
   margin-bottom: 1rem;

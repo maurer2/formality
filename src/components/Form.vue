@@ -123,6 +123,7 @@ export default defineComponent({
 
 .button-group {
   display: flex;
+  // grid-column: 2;
   align-self: start;
   // grid-area: form-buttons;
 
@@ -133,6 +134,8 @@ export default defineComponent({
 
 .debug {
   display: block;
+  // grid-row: 10;
+  grid-column: 1;
   // grid-column: 1/-1;
   margin-top: 1.5rem;
   overflow: scroll;
