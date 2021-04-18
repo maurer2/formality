@@ -108,6 +108,7 @@ export default defineComponent({
   display: flex;
   align-items: flex-start;
   margin-bottom: 1rem;
+  grid-area: email-field;
 }
 
 .validity-icon {

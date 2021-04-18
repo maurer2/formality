@@ -64,6 +64,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .indicator {
   margin-bottom: 1rem;
+  grid-area: indicator;
 }
 
 .label {

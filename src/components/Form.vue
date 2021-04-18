@@ -14,12 +14,12 @@
 
     <div class="button-group">
       <Button
-        class="button"
+        class="button button-reset"
         type="reset"
         :is-disabled="!formIsValid"
       />
       <Button
-        class="button"
+        class="button button-submit"
         type="submit"
         :is-disabled="!formIsValid"
       />
@@ -103,20 +103,24 @@ export default defineComponent({
 .form {
   display: grid;
   grid-template-areas:
-    "email-field"
-    "password-field"
-    "feedback"
-    "submit reset";
+    "email-field email-field"
+    "password-field password-field"
+    "indicator indicator"
+    "form-buttons form-buttons";
+  grid-template-columns: 1fr 1fr;
   grid-template-rows:
-    min-content
-    min-content
-    min-content;
-  width: 100%;
-  margin: auto;
+    auto
+    auto
+    auto
+    auto;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: auto;
+  grid-auto-flow: row;
 }
 
 .button-group {
   display: flex;
+   grid-area: form-buttons;
 }
 
 .debug {
@@ -124,6 +128,7 @@ export default defineComponent({
   margin-top: 1.5rem;
   overflow: scroll;
   font-size: 16px;
+  grid-column: 1/-1;
 }
 
 .output {
