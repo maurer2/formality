@@ -63,8 +63,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .indicator {
-  // grid-column: 2;
-  // grid-area: indicator;
   margin-bottom: 1rem;
 }
 

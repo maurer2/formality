@@ -106,9 +106,6 @@ export default defineComponent({
 <style scoped lang="scss">
 .wrapper {
   display: flex;
-  // grid-row: 1;
-  grid-column: 1;
-  // grid-area: email-field;
   align-items: flex-start;
   margin-bottom: 1rem;
 }

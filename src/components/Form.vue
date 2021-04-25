@@ -6,11 +6,9 @@
     @reset.prevent="handleReset"
   >
     <fieldset class="fields">
-      <!-- eslint-disable -->
       <Email v-model.gmail.trim="formValues.email" />
       <Password v-model.trim="formValues.password" />
     </fieldset>
-
     <fieldset class="controls">
       <Indicator :value="calculatedStrength" />
       <div class="button-group">
@@ -27,7 +25,6 @@
       </div>
     </fieldset>
     <fieldset class="debug">
-      <legend>Debug:</legend>
       <output class="output">{{ $data }}</output>
     </fieldset>
   </form>
@@ -106,34 +103,19 @@ export default defineComponent({
   grid-auto-rows: auto;
   grid-auto-columns: 1fr;
   grid-auto-flow: row dense;
-
-  /*
-  grid-template-areas:
-    "email-field ."
-    "password-field ."
-    "indicator ."
-    "form-buttons .";
-  grid-template-rows:
-    auto
-    auto
-    auto
-    auto;
-  */
-  //grid-template-columns: minmax(auto, 250px) 1fr;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
 }
 
 .fields,
-.controls {
-  display: block;
-  border: none;
+.controls,
+.debug {
+  all: unset;
 }
 
 .button-group {
   display: flex;
-  // grid-column: 2;
   align-self: start;
-  // grid-area: form-buttons;
 
   .button {
     flex-grow: 1;
@@ -142,14 +124,12 @@ export default defineComponent({
 
 .debug {
   display: block;
-  // grid-row: 10;
-  grid-column: 1;
-  // grid-column: 1/-1;
   overflow: scroll;
   font-size: 16px;
 }
 
 .output {
+  display: block;
   white-space: pre;
 }
 
