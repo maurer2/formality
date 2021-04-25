@@ -1,25 +1,27 @@
 <template>
-  <article class="window">
-    <div class="title-bar">
-      <div class="title-bar-text">
-        Formality
+  <div class="container">
+    <article class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          Formality
+        </div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize" @click="handleMinimize">
+            <span class="visually-hidden">Minimize</span>
+          </button>
+          <button aria-label="Maximize" @click="handleMaximize">
+            <span class="visually-hidden">Maximize</span>
+          </button>
+          <button aria-label="Close" @click="handleClose">
+            <span class="visually-hidden">Close</span>
+          </button>
+        </div>
       </div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize" @click="handleMinimize">
-          <span class="visually-hidden">Minimize</span>
-        </button>
-        <button aria-label="Maximize" @click="handleMaximize">
-          <span class="visually-hidden">Maximize</span>
-        </button>
-        <button aria-label="Close" @click="handleClose">
-          <span class="visually-hidden">Close</span>
-        </button>
+      <div v-if="isMaximized" class="window-body">
+        <Form />
       </div>
-    </div>
-    <div v-if="isMaximized" class="window-body">
-      <Form />
-    </div>
-  </article>
+    </article>
+  </div>
 </template>
 
 <script lang="ts">
@@ -57,7 +59,8 @@ export default defineComponent({
 @import "./css/98.css/custom-properties.css";
 
 :root {
-  --max-container-width: 35rem;
+  --min-container-width: 25rem;
+  --max-container-width: 80rem;
 }
 
 html {
@@ -67,8 +70,6 @@ html {
 }
 
 body {
-  display: grid;
-  place-items: center;
   min-height: 100vh;
   overflow-y: scroll;
 }
@@ -84,10 +85,15 @@ body {
   clip: rect(0 0 0 0);
 }
 
-#root {
-  width: calc(100% - 2rem); // temp
-  // width: clamp(25rem, 50vw, var(--max-container-width));
-  margin: 1rem;
-}
+</style>
 
+<style scoped lang="scss">
+.container {
+  display: grid;
+  align-items: center;
+  width: clamp(var(--min-container-width), 50vw, var(--max-container-width));
+  min-height: 100vh;
+  margin: auto;
+  padding: 1rem;
+}
 </style>
