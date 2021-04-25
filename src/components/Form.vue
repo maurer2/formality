@@ -5,25 +5,27 @@
     @submit.prevent="handleSubmit"
     @reset.prevent="handleReset"
   >
-    <!-- eslint-disable -->
-    <Email v-model.gmail.trim="formValues.email" />
+    <fieldset class="fields">
+      <!-- eslint-disable -->
+      <Email v-model.gmail.trim="formValues.email" />
+      <Password v-model.trim="formValues.password" />
+    </fieldset>
 
-    <Password v-model.trim="formValues.password" />
-
-    <Indicator :value="calculatedStrength" />
-
-    <div class="button-group">
-      <Button
-        class="button button-reset"
-        type="reset"
-        :is-disabled="!formIsValid"
-      />
-      <Button
-        class="button button-submit"
-        type="submit"
-        :is-disabled="!formIsValid"
-      />
-    </div>
+    <fieldset class="controls">
+      <Indicator :value="calculatedStrength" />
+      <div class="button-group">
+        <Button
+          class="button button-reset"
+          type="reset"
+          :is-disabled="!formIsValid"
+        />
+        <Button
+          class="button button-submit"
+          type="submit"
+          :is-disabled="!formIsValid"
+        />
+      </div>
+    </fieldset>
     <fieldset class="debug">
       <legend>Debug:</legend>
       <output class="output">{{ $data }}</output>
@@ -121,6 +123,12 @@ export default defineComponent({
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
+.fields,
+.controls {
+  display: block;
+  border: none;
+}
+
 .button-group {
   display: flex;
   // grid-column: 2;
@@ -137,7 +145,6 @@ export default defineComponent({
   // grid-row: 10;
   grid-column: 1;
   // grid-column: 1/-1;
-  margin-top: 1.5rem;
   overflow: scroll;
   font-size: 16px;
 }
