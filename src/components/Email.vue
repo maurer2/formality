@@ -6,7 +6,6 @@
       class="validity-icon"
       alt=""
     >
-
     <div class="field field-row field-row-stacked">
       <label
         class="label"
@@ -43,6 +42,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/runtime-core';
 
+// eslint-disable-next-line no-useless-escape
 const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
 export default defineComponent({
@@ -88,7 +88,7 @@ export default defineComponent({
 
       let newValue = (target as HTMLInputElement).value;
 
-      if ('gmail' in (this.modelModifiers as any)) {
+      if ('gmail' in (this.modelModifiers)) {
         newValue = newValue.replace(/googlemail/ig, 'gmail');
       }
 
@@ -122,7 +122,8 @@ export default defineComponent({
 }
 
 .field {
-  align-items: flex-start;
+  flex-grow: 1;
+  align-items: stretch;
 }
 
 .label {
@@ -131,10 +132,12 @@ export default defineComponent({
 
 .input-group {
   display: flex;
+  align-items: baseline;
 }
 
 .input {
-  margin-right: 1rem;
+  flex-grow: 1;
+  margin-right: 6px;
 }
 
 .clear-button {

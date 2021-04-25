@@ -6,7 +6,6 @@
       class="validity-icon"
       alt=""
     >
-
     <div class="field field-row field-row-stacked">
       <label
         class="label"
@@ -154,7 +153,7 @@ export default defineComponent({
 
 .validity-icon {
   display: block;
-  align-self: top;
+  align-self: center;
   width: 50px;
   height: 50px;
   margin: 0;
@@ -164,19 +163,22 @@ export default defineComponent({
 }
 
 .field {
-  align-items: flex-start;
+  flex-grow: 1;
+  align-items: stretch;
 }
 
 .label {
   margin-left: 6px;
 }
 
-.input-group {
+.input-button-group {
   display: flex;
+  align-items: baseline;
 }
 
 .input {
-  margin-right: 1rem;
+  flex-grow: 1;
+  margin-right: 6px;
 }
 
 .toggle-button,

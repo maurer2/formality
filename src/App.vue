@@ -59,7 +59,7 @@ export default defineComponent({
 @import "./css/98.css/custom-properties.css";
 
 :root {
-  --min-container-width: 25rem;
+  --min-container-width: 22rem;
   --max-container-width: 80rem;
 }
 
@@ -71,6 +71,7 @@ html {
 
 body {
   min-height: 100vh;
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 
@@ -91,7 +92,7 @@ body {
 .container {
   display: grid;
   align-items: center;
-  width: clamp(var(--min-container-width), 50vw, var(--max-container-width));
+  width: clamp(var(--min-container-width), 75vw, var(--max-container-width));
   min-height: 100vh;
   margin: auto;
   padding: 1rem;
