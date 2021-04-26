@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :style="cssVars">
     <article class="window">
       <div class="title-bar">
         <div class="title-bar-text">
@@ -17,7 +17,7 @@
           </button>
         </div>
       </div>
-      <div v-if="isMaximized" class="window-body">
+      <div v-if="!isMinimized" class="window-body">
         <Form />
       </div>
     </article>
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core';
+import { defineComponent, CSSProperties } from 'vue';
 import Form from './components/Form.vue';
 
 export default defineComponent({
@@ -35,15 +35,25 @@ export default defineComponent({
   },
   data() {
     return {
-      isMaximized: true,
+      isMinimized: false,
+      isMaximized: false,
+      containerWidthUpperBound: '80rem',
+      containerWidthUpperBoundMaximized: 'auto',
     };
+  },
+  computed: {
+    cssVars(): CSSProperties {
+      return {
+        '--max-container-width': `${this.isMaximized ? this.containerWidthUpperBoundMaximized : this.containerWidthUpperBound}`,
+      } as {[key: string]: string};
+    },
   },
   methods: {
     handleMinimize() {
       this.isMaximized = false;
     },
     handleMaximize() {
-      this.isMaximized = true;
+      this.isMaximized = !this.isMaximized;
     },
     handleClose() {
       console.log('close');
@@ -57,11 +67,6 @@ export default defineComponent({
 @import "~sanitize.css/forms.css";
 @import "~98.css";
 @import "./css/98.css/custom-properties.css";
-
-:root {
-  --min-container-width: 22rem;
-  --max-container-width: 80rem;
-}
 
 html {
   min-height: 100%;
@@ -90,6 +95,8 @@ body {
 
 <style scoped lang="scss">
 .container {
+  --min-container-width: 22rem;
+
   display: grid;
   align-items: center;
   width: clamp(var(--min-container-width), 75vw, var(--max-container-width));
