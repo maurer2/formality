@@ -24,7 +24,8 @@
     "sass": "^1.32.8",
     "vue": "^3.0.11",
     "vue-loader": "^16.2.0",
-    "vue-svg-loader": "^0.17.0-beta.2"
+    "vue-svg-loader": "^0.17.0-beta.2",
+    "vue-template-compiler": "^2.6.12"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.13.12",

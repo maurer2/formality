@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core';
+import { defineComponent } from 'vue';
 
 const valueMap: { [key: string]: string} = {
   0: 'invalid',
