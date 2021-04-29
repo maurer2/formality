@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="cssVars">
+  <div class="container" :class="cssClasses" :style="cssVars">
     <article class="window">
       <div class="title-bar">
         <div class="title-bar-text">
@@ -37,6 +37,8 @@ export default defineComponent({
     return {
       isMinimized: false,
       isMaximized: false,
+      containerWidthLowerboundMinimized: '10rem',
+      containerWidthLowerBound: '23rem',
       containerWidthUpperBound: '80rem',
       containerWidthUpperBoundMaximized: 'auto',
     };
@@ -44,13 +46,25 @@ export default defineComponent({
   computed: {
     cssVars(): CSSProperties {
       return {
+        '--min-container-width': `${this.isMinimized ? this.containerWidthLowerboundMinimized : this.containerWidthLowerBound}`,
         '--max-container-width': `${this.isMaximized ? this.containerWidthUpperBoundMaximized : this.containerWidthUpperBound}`,
       } as {[key: string]: string};
+    },
+    cssClasses(): string {
+      if (this.isMinimized) {
+        return 'container--is-minimized';
+      }
+
+      if (this.isMaximized) {
+        return 'container--is-maximized';
+      }
+
+      return '';
     },
   },
   methods: {
     handleMinimize() {
-      this.isMaximized = false;
+      this.isMinimized = !this.isMinimized;
     },
     handleMaximize() {
       this.isMaximized = !this.isMaximized;
@@ -95,10 +109,8 @@ body {
 
 <style scoped lang="scss">
 .container {
-  --min-container-width: 22rem;
-
   display: grid;
-  align-items: center;
+  place-items: center stretch;
   width: var(--max-container-width);
   min-height: 100vh;
   margin: auto;
@@ -106,6 +118,11 @@ body {
 
   @supports (width: clamp(1px, 2px, 3px)) {
     width: clamp(var(--min-container-width), 75vw, var(--max-container-width));
+  }
+
+  &--is-minimized {
+    align-items: end;
+    justify-items: start;
   }
 }
 </style>
