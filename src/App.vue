@@ -99,9 +99,13 @@ body {
 
   display: grid;
   align-items: center;
-  width: clamp(var(--min-container-width), 75vw, var(--max-container-width));
+  width: var(--max-container-width);
   min-height: 100vh;
   margin: auto;
   padding: 1rem;
+
+  @supports (width: clamp(1px, 2px, 3px)) {
+    width: clamp(var(--min-container-width), 75vw, var(--max-container-width));
+  }
 }
 </style>
