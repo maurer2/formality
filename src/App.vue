@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, CSSProperties } from 'vue';
+import { defineComponent } from 'vue';
 import Form from './components/Form.vue';
 
 export default defineComponent({
@@ -37,39 +37,36 @@ export default defineComponent({
     return {
       isMinimized: false,
       isMaximized: false,
-      containerWidthLowerboundMinimized: '10rem',
       containerWidthLowerBound: '23rem',
       containerWidthUpperBound: '80rem',
+      containerWidthLowerboundMinimized: '10rem',
       containerWidthUpperBoundMaximized: 'auto',
     };
   },
   computed: {
-    cssVars(): CSSProperties {
+    cssVars(): Record<string, string> {
       return {
-        '--min-container-width': `${this.isMinimized ? this.containerWidthLowerboundMinimized : this.containerWidthLowerBound}`,
-        '--max-container-width': `${this.isMaximized ? this.containerWidthUpperBoundMaximized : this.containerWidthUpperBound}`,
-      } as {[key: string]: string};
+        '--min-container-width': this.containerWidthLowerBound,
+        '--max-container-width': this.containerWidthUpperBound,
+      };
     },
-    cssClasses(): string {
-      if (this.isMinimized) {
-        return 'container--is-minimized';
-      }
+    cssClasses(): Record<string, boolean> {
+      const container = 'container';
 
-      if (this.isMaximized) {
-        return 'container--is-maximized';
-      }
-
-      return '';
+      return {
+        [`${container}--is-minimized`]: this.isMinimized,
+        [`${container}--is-maximized`]: this.isMaximized,
+      };
     },
   },
   methods: {
-    handleMinimize() {
+    handleMinimize(): void {
       this.isMinimized = !this.isMinimized;
     },
-    handleMaximize() {
+    handleMaximize(): void {
       this.isMaximized = !this.isMaximized;
     },
-    handleClose() {
+    handleClose(): void {
       console.log('close');
     },
   },
@@ -121,8 +118,21 @@ body {
   }
 
   &--is-minimized {
-    align-items: end;
-    justify-items: start;
+    // align-items: end;
+    // justify-items: start;
+
+    @supports (width: clamp(1px, 2px, 3px)) {
+      width: clamp(15rem, 75vw, 15rem);
+    }
+  }
+
+  &--is-maximized:not(&--is-minimized) {
+    // align-items: end;
+    // justify-items: start;
+
+    @supports (width: clamp(1px, 2px, 3px)) {
+      width: clamp(var(--min-container-width), 75vw, auto);
+    }
   }
 }
 </style>
