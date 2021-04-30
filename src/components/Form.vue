@@ -63,7 +63,7 @@ export default defineComponent({
   watch: {
     formValues: {
       handler(newFormValues) {
-        const { password, email }: { password: string; email: string } = newFormValues;
+        const { password }: { password: string; email: string } = newFormValues;
 
         const passwordStrength = getPasswordStrength(password);
 

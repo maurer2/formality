@@ -67,8 +67,11 @@
     "minimist": "^1.2.2"
   },
   "lint-staged": {
-    "*.{js,vue}": [
+    "*.{js,ts,vue,css,scss}": [
       "vue-cli-service lint"
+    ],
+    "*.{vue}": [
+      "stylelint --allow-empty-input"
     ]
   }
 }
