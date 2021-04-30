@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :class="cssClasses" :style="cssVars">
+  <div class="container" :class="cssClasses">
     <article class="window">
       <div class="title-bar">
         <div class="title-bar-text">
@@ -39,17 +39,9 @@ export default defineComponent({
       isMaximized: false,
       containerWidthLowerBound: '23rem',
       containerWidthUpperBound: '80rem',
-      containerWidthLowerboundMinimized: '10rem',
-      containerWidthUpperBoundMaximized: 'auto',
     };
   },
   computed: {
-    cssVars(): Record<string, string> {
-      return {
-        '--min-container-width': this.containerWidthLowerBound,
-        '--max-container-width': this.containerWidthUpperBound,
-      };
-    },
     cssClasses(): Record<string, boolean> {
       const container = 'container';
 
@@ -61,13 +53,20 @@ export default defineComponent({
   },
   methods: {
     handleMinimize(): void {
+      if (this.isMaximized) {
+        this.isMaximized = false;
+      }
       this.isMinimized = !this.isMinimized;
     },
     handleMaximize(): void {
+      if (this.isMinimized) {
+        this.isMinimized = false;
+      }
       this.isMaximized = !this.isMaximized;
     },
     handleClose(): void {
-      console.log('close');
+      this.isMinimized = false;
+      this.isMaximized = false;
     },
   },
 });
@@ -106,10 +105,13 @@ body {
 
 <style scoped lang="scss">
 .container {
+  --min-container-width: 23rem;
+  --max-container-width: 80rem;
+
   display: grid;
   grid-auto-rows: auto;
   grid-auto-flow: column;
-  grid-template-columns: 100vw;
+  grid-template-columns: 75vw;
   align-content: center;
   justify-content: center;
   min-height: 100vh;
@@ -125,8 +127,9 @@ body {
     justify-content: start;
   }
 
-  &--is-maximized:not(&--is-minimized) {
+  &--is-maximized {
     grid-template-columns: 100%;
   }
 }
+
 </style>
