@@ -5,35 +5,33 @@
     @submit.prevent="handleSubmit"
     @reset.prevent="handleReset"
   >
-    <!-- eslint-disable -->
-    <Email v-model.gmail.trim="formValues.email" />
-
-    <Password v-model.trim="formValues.password" />
-
-    <Indicator :value="calculatedStrength" />
-
-    <div class="button-group">
-      <Button
-        class="button button-reset"
-        type="reset"
-        :is-disabled="!formIsValid"
-      />
-      <Button
-        class="button button-submit"
-        type="submit"
-        :is-disabled="!formIsValid"
-      />
-    </div>
-
+    <fieldset class="fields">
+      <Email v-model.gmail.trim="formValues.email" />
+      <Password v-model.trim="formValues.password" />
+    </fieldset>
+    <fieldset class="controls">
+      <Indicator :value="calculatedStrength" />
+      <div class="button-group">
+        <Button
+          class="button button-reset"
+          type="reset"
+          :is-disabled="!formIsValid"
+        />
+        <Button
+          class="button button-submit"
+          type="submit"
+          :is-disabled="!formIsValid"
+        />
+      </div>
+    </fieldset>
     <fieldset class="debug">
-      <legend>Debug:</legend>
       <output class="output">{{ $data }}</output>
     </fieldset>
   </form>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core';
+import { defineComponent } from 'vue';
 
 import Email from './Email.vue';
 import Password from './Password.vue';
@@ -65,7 +63,7 @@ export default defineComponent({
   watch: {
     formValues: {
       handler(newFormValues) {
-        const { password, email }: { password: string; email: string } = newFormValues;
+        const { password }: { password: string; email: string } = newFormValues;
 
         const passwordStrength = getPasswordStrength(password);
 
@@ -104,34 +102,34 @@ export default defineComponent({
   display: grid;
   grid-auto-rows: auto;
   grid-auto-columns: 1fr;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "email-field email-field"
-    "password-field password-field"
-    "indicator indicator"
-    "form-buttons form-buttons";
-  grid-template-rows:
-    auto
-    auto
-    auto
-    auto;
-  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: row dense;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.fields,
+.controls,
+.debug {
+  all: unset;
 }
 
 .button-group {
   display: flex;
-  grid-area: form-buttons;
+  align-self: start;
+
+  .button {
+    flex-grow: 1;
+  }
 }
 
 .debug {
   display: block;
-  grid-column: 1/-1;
-  margin-top: 1.5rem;
   overflow: scroll;
   font-size: 16px;
 }
 
 .output {
+  display: block;
   white-space: pre;
 }
 

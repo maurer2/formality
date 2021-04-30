@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
-const sass = require('sass')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const sass = require('sass');
 
 module.exports = {
   lintOnSave: false,

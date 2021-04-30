@@ -6,7 +6,6 @@
       class="validity-icon"
       alt=""
     >
-
     <div class="field field-row field-row-stacked">
       <label
         class="label"
@@ -71,7 +70,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core';
+import { defineComponent } from 'vue';
 
 import PasswordCriterion from './Password-Criterion.vue';
 
@@ -148,14 +147,13 @@ export default defineComponent({
 <style scoped lang="scss">
 .wrapper {
   display: flex;
-  grid-area: password-field;
   align-items: flex-start;
   margin-bottom: 1rem;
 }
 
 .validity-icon {
   display: block;
-  align-self: top;
+  align-self: center;
   width: 50px;
   height: 50px;
   margin: 0;
@@ -165,19 +163,22 @@ export default defineComponent({
 }
 
 .field {
-  align-items: flex-start;
+  flex-grow: 1;
+  align-items: stretch;
 }
 
 .label {
   margin-left: 6px;
 }
 
-.input-group {
+.input-button-group {
   display: flex;
+  align-items: baseline;
 }
 
 .input {
-  margin-right: 1rem;
+  flex-grow: 1;
+  margin-right: 6px;
 }
 
 .toggle-button,
