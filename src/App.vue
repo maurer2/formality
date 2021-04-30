@@ -107,32 +107,26 @@ body {
 <style scoped lang="scss">
 .container {
   display: grid;
-  place-items: center stretch;
-  width: var(--max-container-width);
+  grid-auto-rows: auto;
+  grid-auto-flow: column;
+  grid-template-columns: 100vw;
+  align-content: center;
+  justify-content: center;
   min-height: 100vh;
-  margin: auto;
   padding: 1rem;
 
   @supports (width: clamp(1px, 2px, 3px)) {
-    width: clamp(var(--min-container-width), 75vw, var(--max-container-width));
+    grid-template-columns: clamp(var(--min-container-width), 75vw, var(--max-container-width));
   }
 
   &--is-minimized {
-    // align-items: end;
-    // justify-items: start;
-
-    @supports (width: clamp(1px, 2px, 3px)) {
-      width: clamp(15rem, 75vw, 15rem);
-    }
+    grid-template-columns: 10rem;
+    align-content: end;
+    justify-content: start;
   }
 
   &--is-maximized:not(&--is-minimized) {
-    // align-items: end;
-    // justify-items: start;
-
-    @supports (width: clamp(1px, 2px, 3px)) {
-      width: clamp(var(--min-container-width), 75vw, auto);
-    }
+    grid-template-columns: 100%;
   }
 }
 </style>
