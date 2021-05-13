@@ -7,7 +7,10 @@
   >
     <fieldset class="fields">
       <Email v-model.gmail.trim="formValues.email" />
-      <Password v-model.trim="formValues.password" />
+      <Password
+        v-model.trim="formValues.password"
+        :should-force-password-obfuscation="shouldForcePasswordObfuscation"
+      />
     </fieldset>
     <fieldset class="controls">
       <Indicator :value="calculatedStrength" />
@@ -55,10 +58,21 @@ export default defineComponent({
         email: '' as string,
         password: '' as string,
       },
-      formIsValid: false as boolean,
+      formIsValid: true as boolean,
+      formIsSubmitting: false,
       calculatedStrength: 0 as number,
       passwordFeedback: {},
     };
+  },
+  computed: {
+    shouldForcePasswordObfuscation(): boolean {
+      if (!this.formIsValid) {
+        return false;
+      }
+
+      // WIP
+      return this.formIsSubmitting;
+    },
   },
   watch: {
     formValues: {
@@ -92,6 +106,11 @@ export default defineComponent({
     },
     handleSubmit(): void {
       console.log('submit');
+      this.formIsSubmitting = true;
+
+      window.setTimeout(() => {
+        this.formIsSubmitting = false;
+      }, 2000);
     },
   },
 });

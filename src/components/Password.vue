@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 import PasswordCriterion from './Password-Criterion.vue';
 
@@ -86,16 +86,21 @@ export default defineComponent({
   },
   props: {
     modelValue: {
-      type: String,
+      type: String as PropType<string>,
       required: true,
     },
     modelModifiers: {
       type: Object,
       default: () => { /**/ },
     },
+    // https://technology.blog.gov.uk/2021/04/19/simple-things-are-complicated-making-a-show-password-option/
+    shouldForcePasswordObfuscation: {
+      type: Boolean as PropType<boolean>,
+      required: true,
+      default: false,
+    },
   },
   emits: ['update:modelValue'],
-
   data() {
     return {
       isObfuscated: true,
@@ -105,6 +110,10 @@ export default defineComponent({
   },
   computed: {
     fieldType(): string {
+      if (this.shouldForcePasswordObfuscation) {
+        return 'password';
+      }
+
       return (this.isObfuscated) ? 'password' : 'text';
     },
     isValid(): boolean {
