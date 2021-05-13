@@ -77,6 +77,8 @@ import PasswordCriterion from './Password-Criterion.vue';
 import EyeIcon from '../../public/eye.svg';
 import EyeDisabledIcon from '../../public/eye-disabled.svg';
 
+type fieldType = 'password' | 'text';
+
 export default defineComponent({
   name: 'Password',
   components: {
@@ -105,13 +107,15 @@ export default defineComponent({
     return {
       isObfuscated: true,
       isDirty: false,
+      // isUntouched: true,
+      // isPristine: true,
       validationRules: [],
     };
   },
   computed: {
-    fieldType(): string {
+    fieldType(): fieldType {
       if (this.shouldForcePasswordObfuscation) {
-        return 'password';
+        // return 'password';
       }
 
       return (this.isObfuscated) ? 'password' : 'text';
@@ -128,6 +132,16 @@ export default defineComponent({
     showErrors(): boolean {
       return this.isDirty && !this.isValid;
     },
+  },
+  watch: {
+    shouldForcePasswordObfuscation(newShouldForcePasswordObfuscation: boolean): void {
+      if (!newShouldForcePasswordObfuscation) {
+        return;
+      }
+
+      this.isObfuscated = true;
+    },
+
   },
   methods: {
     updateValue(event: Event): void {
