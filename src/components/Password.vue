@@ -21,7 +21,7 @@
           :type="fieldType"
           class="input"
           placeholder="Enter password"
-          autocomplete="off"
+          autocomplete="new-password"
           :value="modelValue"
           size="25"
           @input="updateValue"

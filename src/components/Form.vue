@@ -2,6 +2,7 @@
   <form
     class="form"
     novalidate="novalidate"
+    autocomplete="off"
     @submit.prevent="handleSubmit"
     @reset.prevent="handleReset"
   >

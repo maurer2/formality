@@ -18,7 +18,7 @@
       <div class="input-group">
         <input
           id="email"
-          type="email"
+          type="search"
           class="input"
           placeholder="Enter email"
           autocomplete="off"
@@ -138,6 +138,28 @@ export default defineComponent({
 .input {
   flex-grow: 1;
   margin-right: 6px;
+
+  // copy styles from other inputs
+  &[type=search] {
+    box-sizing: border-box;
+    height: 21px;
+    padding: 3px 4px;
+    border: none;
+    border-radius: 0;
+    line-height: 2;
+    background-color: #fff;
+    outline: none;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    appearance: none;
+
+    &::-webkit-search-decoration {
+      -webkit-appearance: none;
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
 }
 
 .clear-button {
