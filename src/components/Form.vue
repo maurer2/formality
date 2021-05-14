@@ -92,14 +92,8 @@ export default defineComponent({
       console.log('reset');
 
       const entries = Object.entries(this.formValues);
-      const newFormValuesNested = entries.map(([key]) => {
-        const newValue = {
-          [key]: '',
-        };
-
-        return newValue;
-      });
-      const newFormValues = Object.assign({}, ...newFormValuesNested);
+      const newFormValuesNested = entries.map(([key]) => [key, '']);
+      const newFormValues = Object.fromEntries(newFormValuesNested);
 
       this.formValues = newFormValues;
       this.calculatedStrength = 0;
