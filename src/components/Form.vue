@@ -10,7 +10,7 @@
       <Email v-model.gmail.trim="formValues.email" />
       <Password
         v-model.trim="formValues.password"
-        :should-force-password-obfuscation="shouldForcePasswordObfuscation"
+        :submit-is-triggered="submitIsTriggered"
       />
     </fieldset>
     <fieldset class="controls">
@@ -66,7 +66,7 @@ export default defineComponent({
     };
   },
   computed: {
-    shouldForcePasswordObfuscation(): boolean {
+    submitIsTriggered(): boolean {
       if (!this.formIsValid) {
         return false;
       }

@@ -96,7 +96,7 @@ export default defineComponent({
       default: () => { /**/ },
     },
     // https://technology.blog.gov.uk/2021/04/19/simple-things-are-complicated-making-a-show-password-option/
-    shouldForcePasswordObfuscation: {
+    submitIsTriggered: {
       type: Boolean as PropType<boolean>,
       required: true,
       default: false,
@@ -114,10 +114,6 @@ export default defineComponent({
   },
   computed: {
     fieldType(): fieldType {
-      if (this.shouldForcePasswordObfuscation) {
-        // return 'password';
-      }
-
       return (this.isObfuscated) ? 'password' : 'text';
     },
     isValid(): boolean {
