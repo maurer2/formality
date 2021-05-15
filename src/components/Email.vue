@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <img
-      v-if="showErrors"
+      v-if="hasErrors"
       src="../assets/error.png"
       class="validity-icon"
       alt=""
@@ -43,7 +43,7 @@
           Clear
         </button>
       </div>
-      <div v-if="showErrors">
+      <div v-if="hasErrors">
         Error
       </div>
     </div>
@@ -92,6 +92,7 @@ export default defineComponent({
   },
   computed: {
     isPristine(): boolean {
+      // angular doesn't revert to pristine when setting value back to default
       return this.modelValue === this.initalValueModelValue;
     },
     isValid(): boolean {
@@ -100,8 +101,12 @@ export default defineComponent({
     clearButtonIsDisabled(): boolean {
       return !this.modelValue;
     },
-    showErrors(): boolean {
-      return !this.isValid && this.isTouched && !this.isPristine;
+    hasErrors(): boolean {
+      if (!this.isTouched) {
+        return false;
+      }
+
+      return !this.isPristine && !this.isValid;
     },
   },
   mounted() {
