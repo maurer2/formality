@@ -7,6 +7,13 @@
       alt=""
     >
     <div class="field field-row field-row-stacked">
+      <code>
+        <pre>
+          isPristine: {{ Boolean(isPristine) }}
+          isTouched {{ Boolean(isTouched) }}
+          isValid {{ Boolean(isValid) }}
+        </pre>
+      </code>
       <label
         class="label"
         for="email"
@@ -24,7 +31,8 @@
           autocomplete="off"
           :value="modelValue"
           size="25"
-          @change="updateValue"
+          @input="updateValue"
+          @blur="setTouchedState"
         >
         <button
           class="clear-button"
@@ -34,6 +42,9 @@
         >
           Clear
         </button>
+      </div>
+      <div v-if="showErrors">
+        Error
       </div>
     </div>
   </div>
@@ -51,6 +62,7 @@ export default defineComponent({
     modelValue: {
       type: String,
       required: true,
+      default: '',
     },
     modelModifiers: {
       type: Object,
@@ -59,12 +71,29 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   data() {
+    // https://stackoverflow.com/a/55552235/1870482
+    /*
+    valid,
+    invalid,
+    pristine: This property returns true if the element’s contents have not been changed.
+    dirty: This property returns true if the element’s contents have been changed.
+    untouched: This property returns true if the user has not visited the element.
+    touched: This property returns true if the user has visited the element.
+    */
     return {
-      isDirty: false,
+      initalValueModelValue: '',
+
+      // isPristine: true, // not dirty
+      isTouched: false, // not touched
+      // isValid: true, // not invalid
+
       validationRules: [],
     };
   },
   computed: {
+    isPristine(): boolean {
+      return this.modelValue === this.initalValueModelValue;
+    },
     isValid(): boolean {
       return emailRegex.test(this.modelValue);
     },
@@ -72,13 +101,16 @@ export default defineComponent({
       return !this.modelValue;
     },
     showErrors(): boolean {
-      return this.isDirty && !this.isValid;
+      return !this.isValid && this.isTouched && !this.isPristine;
     },
   },
   mounted() {
-    this.isDirty = false;
+    this.initalValueModelValue = this.modelValue;
   },
   methods: {
+    setTouchedState(): void {
+      this.isTouched = true;
+    },
     updateValue(event: InputEvent): void {
       const { target } = event;
 
@@ -93,11 +125,10 @@ export default defineComponent({
       }
 
       this.$emit('update:modelValue', newValue);
-      this.isDirty = true;
     },
     resetValue(): void {
       this.$emit('update:modelValue', '');
-      this.isDirty = false;
+      // todo
     },
   },
 });
