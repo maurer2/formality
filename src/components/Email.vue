@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <img
-      v-if="hasErrors"
+      v-if="showErrors"
       src="../assets/error.png"
       class="validity-icon"
       alt=""
@@ -43,7 +43,7 @@
           Clear
         </button>
       </div>
-      <div v-if="hasErrors">
+      <div v-if="showErrors">
         Error
       </div>
     </div>
@@ -66,7 +66,10 @@ export default defineComponent({
     },
     modelModifiers: {
       type: Object,
-      default: () => { /**/ },
+      default: () => ({
+        trim: true,
+        gmail: false,
+      }) as Record<string, boolean>,
     },
   },
   emits: ['update:modelValue'],
@@ -101,7 +104,11 @@ export default defineComponent({
     clearButtonIsDisabled(): boolean {
       return !this.modelValue;
     },
-    hasErrors(): boolean {
+    showErrors(): boolean {
+      if (this.isValid) {
+        return true;
+      }
+
       if (!this.isTouched) {
         return false;
       }

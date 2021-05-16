@@ -56,7 +56,7 @@ export default defineComponent({
   data() {
     return {
       formValues: {
-        email: '' as string,
+        email: 'wefew' as string,
         password: '' as string,
       },
       formIsValid: true as boolean,
