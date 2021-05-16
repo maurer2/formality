@@ -12,6 +12,8 @@
           isPristine: {{ Boolean(isPristine) }}
           isTouched {{ Boolean(isTouched) }}
           isValid {{ Boolean(isValid) }}
+          showErrors: {{ Boolean(showErrors) }}
+          isPrefilled {{ Boolean(isPrefilled) }}
         </pre>
       </code>
       <label
@@ -95,25 +97,35 @@ export default defineComponent({
   },
   computed: {
     isPristine(): boolean {
-      // angular doesn't revert to pristine when setting value back to default
+      // angular doesn't revert to pristine when setting value back to initial value
       return this.modelValue === this.initalValueModelValue;
     },
     isValid(): boolean {
       return emailRegex.test(this.modelValue);
     },
+    isPrefilled(): boolean {
+      return !!this.initalValueModelValue.length;
+    },
     clearButtonIsDisabled(): boolean {
       return !this.modelValue;
     },
+
     showErrors(): boolean {
       if (this.isValid) {
-        return true;
-      }
-
-      if (!this.isTouched) {
         return false;
       }
 
-      return !this.isPristine && !this.isValid;
+      // always show errors when prefilled content is invalud
+      if (this.isPrefilled) {
+        return true;
+      }
+
+      // show error when user has focused the field and has changed values
+      if (this.isTouched && !this.isPristine) {
+        return true;
+      }
+
+      return false;
     },
   },
   mounted() {
