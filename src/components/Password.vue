@@ -7,6 +7,15 @@
       alt=""
     >
     <div class="field field-row field-row-stacked">
+      <code>
+        <pre>
+          isPristine: {{ Boolean(isPristine) }}
+          isTouched {{ Boolean(isTouched) }}
+          isValid {{ Boolean(isValid) }}
+          showErrors: {{ Boolean(showErrors) }}
+          isPrefilled {{ Boolean(isPrefilled) }}
+        </pre>
+      </code>
       <label
         class="label"
         for="password"
@@ -25,13 +34,14 @@
           :value="modelValue"
           size="25"
           @input="updateValue"
+          @blur="setTouchedState"
         >
         <button
           class="toggle-button"
           :class="{ 'toggle-button--is-disabled': toggleButtonIsDisabled }"
           type="button"
           :disabled="toggleButtonIsDisabled"
-          @click="handleButtonToggle"
+          @click="handleToggleButtonClick"
         >
           <template v-if="isObfuscated">
             <span class="visually-hidden">
@@ -54,6 +64,9 @@
         >
           Clear
         </button>
+      </div>
+      <div v-if="showErrors">
+        Error
       </div>
       <div class="criteria">
         <PasswordCriterion
@@ -93,7 +106,7 @@ export default defineComponent({
     },
     modelModifiers: {
       type: Object,
-      default: () => { /**/ },
+      default: () => ({ /**/ }) as Record<string, boolean>,
     },
     // https://technology.blog.gov.uk/2021/04/19/simple-things-are-complicated-making-a-show-password-option/
     submitIsTriggered: {
@@ -106,9 +119,8 @@ export default defineComponent({
   data() {
     return {
       isObfuscated: true,
-      isDirty: false,
-      // isUntouched: true,
-      // isPristine: true,
+      initalValueModelValue: '',
+      isTouched: false,
       validationRules: [],
     };
   },
@@ -116,8 +128,15 @@ export default defineComponent({
     fieldType(): fieldType {
       return (this.isObfuscated) ? 'password' : 'text';
     },
+    isPristine(): boolean {
+      // angular doesn't revert to pristine when setting value back to initial value
+      return this.modelValue === this.initalValueModelValue;
+    },
     isValid(): boolean {
-      return true;
+      return this.modelValue.length >= 3; // temp
+    },
+    isPrefilled(): boolean {
+      return !!this.initalValueModelValue.length;
     },
     clearButtonIsDisabled(): boolean {
       return !this.modelValue;
@@ -126,7 +145,21 @@ export default defineComponent({
       return !this.modelValue;
     },
     showErrors(): boolean {
-      return this.isDirty && !this.isValid;
+      if (this.isValid) {
+        return false;
+      }
+
+      // always show errors when prefilled content is invalid
+      if (this.isPrefilled) {
+        return true;
+      }
+
+      // show error when field has lost focus at least once and the content has changed
+      if (this.isTouched && !this.isPristine) {
+        return true;
+      }
+
+      return false;
     },
   },
   watch: {
@@ -139,7 +172,16 @@ export default defineComponent({
     },
 
   },
+  mounted() {
+    this.initalValueModelValue = this.modelValue;
+  },
   methods: {
+    setTouchedState(): void {
+      this.isTouched = true;
+    },
+    handleToggleButtonClick() {
+      this.isObfuscated = !this.isObfuscated;
+    },
     updateValue(event: Event): void {
       const { target } = event;
 
@@ -150,14 +192,12 @@ export default defineComponent({
       const newValue: string = (target as HTMLInputElement).value;
 
       this.$emit('update:modelValue', newValue);
-      this.isDirty = true;
     },
     resetValue(): void {
+      this.initalValueModelValue = '';
+      this.isTouched = false;
+
       this.$emit('update:modelValue', '');
-      this.isDirty = false;
-    },
-    handleButtonToggle() {
-      this.isObfuscated = !this.isObfuscated;
     },
   },
 });
@@ -220,6 +260,10 @@ export default defineComponent({
   .icon {
     margin: 0;
   }
+}
+
+code pre {
+  white-space: pre-line;
 }
 
 </style>
