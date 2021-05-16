@@ -87,11 +87,7 @@ export default defineComponent({
     */
     return {
       initalValueModelValue: '',
-
-      // isPristine: true, // not dirty
-      isTouched: false, // not touched
-      // isValid: true, // not invalid
-
+      isTouched: false,
       validationRules: [],
     };
   },
@@ -115,12 +111,12 @@ export default defineComponent({
         return false;
       }
 
-      // always show errors when prefilled content is invalud
+      // always show errors when prefilled content is invalid
       if (this.isPrefilled) {
         return true;
       }
 
-      // show error when user has focused the field and has changed values
+      // show error when field has lost focus at least once and the content has changed
       if (this.isTouched && !this.isPristine) {
         return true;
       }
@@ -151,8 +147,10 @@ export default defineComponent({
       this.$emit('update:modelValue', newValue);
     },
     resetValue(): void {
+      this.initalValueModelValue = '';
+      this.isTouched = false;
+
       this.$emit('update:modelValue', '');
-      // todo
     },
   },
 });
@@ -228,6 +226,10 @@ export default defineComponent({
   :not([disabled]) {
     cursor: pointer;
   }
+}
+
+code pre {
+  white-space: pre-line;
 }
 
 </style>
